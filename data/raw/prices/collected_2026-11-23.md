@@ -43,10 +43,10 @@ Footer: "Live TV streaming will include ads. 4K plan is supported on 4K TVs and 
 
 Not expanded (skipped, not core): "Premium kids' content" ₹1 / 3 months (looks promotional); "All Live TV Channels" ₹499 / 12 months.
 
-## Still to do
-- **JioHotstar** — https://www.jiohotstar.com/subscribe : Chrome extension said "Permission denied … on this domain" even after Sangita clicked Allow. Needs the site allowed in the Claude extension's site settings, then retry.
-- **Aha** — /subscribe is a 404. Homepage https://www.aha.video/ has "Subscribe Now" and "View Plans" links — follow those.
-- **Hoichoi** — https://www.hoichoi.tv/ (find plans link)
-- **Sun NXT** — https://www.sunnxt.com/ (find plans link)
-- **Planet Marathi** — https://www.planetmarathi.com/ (find plans link)
-- **Prime Video** — https://www.amazon.in/amazonprime (Prime Video is part of Amazon Prime in India). Note: validator derives the allowed price domain from `official_plans_url`, so set Prime's official_plans_url to the amazon.in page if that's where prices are.
+## Update (later on 2026-11-23)
+Aha, Hoichoi, Sun NXT, Prime Video and the platform facts were collected through Claude chat
+(web browsing), because Claude in Chrome could not read pages. Raw answers saved unchanged in:
+- `claude_chat_plans_2026-11-23.csv`
+- `claude_chat_platform_facts_2026-11-23.csv`
+
+JioHotstar and Planet Marathi could not be accessed - see `data/TODO_verify.md`.
