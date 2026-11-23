@@ -191,6 +191,25 @@ def test_empty_price_is_a_warning_not_an_error(tmp_path: Path) -> None:
     assert any("'price_inr' is empty" in w for w in report.warnings)
 
 
+def test_single_figure_without_range_gives_no_warning(tmp_path: Path) -> None:
+    """A source that gives just '16M' is complete data, not an unverified value."""
+    report = run_with_change(tmp_path, SUBSCRIBERS.filename, value_low="", value_high="")
+    assert report.ok
+    assert report.warnings == []
+
+
+def test_lower_bound_only_gives_no_warning(tmp_path: Path) -> None:
+    """'180M+' is recorded as value_low only."""
+    report = run_with_change(tmp_path, SUBSCRIBERS.filename, value="", value_low="180", value_high="")
+    assert report.ok
+    assert report.warnings == []
+
+
+def test_empty_notes_gives_no_warning(tmp_path: Path) -> None:
+    report = validate(write_dataset(tmp_path, valid_rows()), today=TODAY)
+    assert report.warnings == []
+
+
 def test_low_above_high(tmp_path: Path) -> None:
     report = run_with_change(tmp_path, SUBSCRIBERS.filename, value="", value_low="20", value_high="10")
     assert_error(report, "value_low 20 is greater than value_high 10")
