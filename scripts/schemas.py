@@ -47,6 +47,13 @@ class Column:
     kind: str  # one of: text, int, number, date, url, bool, enum, list, platform_ref
     required: bool = True  # False = may be left empty (e.g. not yet verified)
     choices: frozenset[str] = field(default_factory=frozenset)
+    # Empty optional cells normally mean "not verified yet" and produce a warning.
+    # Set False where empty is a normal, complete answer (e.g. a source gave no range).
+    blank_is_normal: bool = False
+
+    @property
+    def warn_if_empty(self) -> bool:
+        return not self.required and not self.blank_is_normal
 
 
 @dataclass(frozen=True)
@@ -70,7 +77,7 @@ PROVENANCE = (
     Column("accessed_date", "date"),
     Column("source_name", "text"),
     Column("source_url", "url"),
-    Column("notes", "text", required=False),
+    Column("notes", "text", required=False, blank_is_normal=True),
 )
 
 PLATFORMS = Dataset(
@@ -110,9 +117,11 @@ SUBSCRIBERS = Dataset(
     filename="subscribers.csv",
     columns=(
         Column("platform_id", "platform_ref"),
-        Column("value", "number", required=False),
-        Column("value_low", "number", required=False),
-        Column("value_high", "number", required=False),
+        # A source may give a single figure ("16M") or only a range ("180M+"), so any of
+        # these may be blank. validate_data.py still errors if all three are blank.
+        Column("value", "number", required=False, blank_is_normal=True),
+        Column("value_low", "number", required=False, blank_is_normal=True),
+        Column("value_high", "number", required=False, blank_is_normal=True),
         _enum("unit", UNITS),
         _enum("metric_type", METRIC_TYPES),
         _enum("scope", SCOPES),

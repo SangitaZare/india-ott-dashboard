@@ -157,9 +157,8 @@ def check_rows(dataset: Dataset, rows: list[Row], report: Report, today: date) -
             message = check_cell(column, value)
             if message:
                 report.error(where, message)
-            elif value == "" and not column.required:
-                if column.name != "notes":
-                    report.warn(where, f"'{column.name}' is empty - list it in data/TODO_verify.md")
+            elif value == "" and column.warn_if_empty:
+                report.warn(where, f"'{column.name}' is empty - list it in data/TODO_verify.md")
 
         check_dates(row, where, report, today)
 
