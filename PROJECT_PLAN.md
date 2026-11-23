@@ -66,8 +66,8 @@ Collect every figure with its exact metric type. Starting leads from research (f
 - [x] Note when the included OTT tier is cut down (e.g. mobile-only)
 
 ### M5 — `feature/analysis-notebook`
-- [ ] `notebooks/analysis.ipynb`: clean, explore, charts, written insights
-- [ ] Key insights section in plain business language (5 bullets max)
+- [x] `notebooks/analysis.ipynb`: clean, explore, charts, written insights
+- [x] Key insights section in plain business language (5 bullets max)
 
 ### M6 — `feature/dashboard-reconciliation`
 - [ ] `scripts/export_json.py`
