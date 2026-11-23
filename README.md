@@ -12,3 +12,18 @@ python -m venv .venv
 pip install -r requirements.txt
 python -m pytest -q
 ```
+
+## Run the analysis
+
+```bash
+python scripts/validate_data.py     # check every CSV against the data rules
+python scripts/build_db.py          # data/*.csv -> build/ott.db (refuses invalid data)
+python scripts/run_analysis.py      # print the answers to every question in sql/analysis.sql
+```
+
+The analysis notebook is [notebooks/analysis.ipynb](notebooks/analysis.ipynb). It is generated, so after a data change rebuild it with:
+
+```bash
+python scripts/make_notebook.py
+jupyter nbconvert --to notebook --execute --inplace notebooks/analysis.ipynb
+```
