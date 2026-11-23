@@ -106,6 +106,8 @@ ORDER BY price_per_month, platform_id;
 -- name: bundle_vs_separate
 -- Q5. Is a telecom/DTH bundle cheaper than buying each included platform on its own?
 -- "Separately" = the cheapest current plan of each platform, per month (from Q2b's logic).
+-- Day-based bundles (validity_days, e.g. 28) are converted with 365/12 = 30.42 days per month,
+-- so a ₹449 / 28-day plan costs ₹487.79 per month, not ₹449.
 -- Caveat: a bundle often includes a cut-down tier (see bundles.notes), so this is a best case for buying separately.
 WITH cheapest AS (
     SELECT platform_id, MIN(price_per_month) AS cheapest_per_month
@@ -118,9 +120,11 @@ bundle_monthly AS (
         b.bundle_name,
         b.billing_period,
         b.as_of_date,
-        b.price_inr * 1.0
-            / CASE b.billing_period WHEN 'month' THEN 1 WHEN 'quarter' THEN 3 WHEN 'year' THEN 12 END
-            AS bundle_per_month
+        CASE
+            WHEN b.validity_days IS NOT NULL THEN b.price_inr * 365.0 / 12 / b.validity_days
+            ELSE b.price_inr * 1.0
+                 / CASE b.billing_period WHEN 'month' THEN 1 WHEN 'quarter' THEN 3 WHEN 'year' THEN 12 END
+        END AS bundle_per_month
     FROM bundles AS b
     WHERE b.price_inr IS NOT NULL
 )

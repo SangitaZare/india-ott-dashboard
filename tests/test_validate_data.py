@@ -191,6 +191,18 @@ def test_empty_price_is_a_warning_not_an_error(tmp_path: Path) -> None:
     assert any("'price_inr' is empty" in w for w in report.warnings)
 
 
+def test_blank_validity_days_gives_no_warning(tmp_path: Path) -> None:
+    """Most bundles are billed per calendar month, so a blank validity_days is complete data."""
+    report = run_with_change(tmp_path, BUNDLES.filename, validity_days="")
+    assert report.ok
+    assert report.warnings == []
+
+
+@pytest.mark.parametrize("bad, message", [("0", "at least 1"), ("-28", "whole number"), ("28.5", "whole number")])
+def test_invalid_validity_days(tmp_path: Path, bad: str, message: str) -> None:
+    assert_error(run_with_change(tmp_path, BUNDLES.filename, validity_days=bad), message)
+
+
 def test_single_figure_without_range_gives_no_warning(tmp_path: Path) -> None:
     """A source that gives just '16M' is complete data, not an unverified value."""
     report = run_with_change(tmp_path, SUBSCRIBERS.filename, value_low="", value_high="")

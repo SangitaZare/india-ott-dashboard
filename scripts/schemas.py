@@ -139,6 +139,10 @@ BUNDLES = Dataset(
         Column("bundle_name", "text"),
         Column("price_inr", "number", required=False),
         _enum("billing_period", BILLING_PERIODS),
+        # Telecom plans last e.g. 28 or 84 days, not calendar months. When the page states
+        # a validity in days, record it here; analysis then uses it instead of billing_period.
+        # Blank = the plan really is billed per calendar month/quarter/year.
+        Column("validity_days", "int", required=False, blank_is_normal=True),
         Column("included_platforms", "list"),
         *PROVENANCE,
     ),

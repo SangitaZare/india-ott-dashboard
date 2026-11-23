@@ -243,6 +243,12 @@ def check_bundle_platforms(rows: list[Row], platform_ids: set[str], report: Repo
                 report.error(location(BUNDLES, index), f"included platform '{item}' is not in platforms.csv")
 
 
+def check_bundle_validity(rows: list[Row], report: Report) -> None:
+    for index, row in enumerate(rows):
+        if row.get("validity_days", "") == "0":
+            report.error(location(BUNDLES, index), "validity_days must be at least 1")
+
+
 # --- Entry points ------------------------------------------------------------------
 
 
@@ -274,6 +280,7 @@ def validate(data_dir: Path, today: date | None = None) -> Report:
         check_subscriber_values(subscribers, report)
     if (bundles := loaded.get(BUNDLES.filename)) is not None:
         check_bundle_platforms(bundles, platform_ids, report)
+        check_bundle_validity(bundles, report)
 
     return report
 

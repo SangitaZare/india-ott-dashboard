@@ -47,9 +47,9 @@ def subscriber(pid: str, metric: str, value: str = "", low: str = "", high: str 
     }
 
 
-def bundle(name: str, inr: str, period: str, platforms: str) -> dict[str, str]:
+def bundle(name: str, inr: str, period: str, platforms: str, days: str = "") -> dict[str, str]:
     return {
-        "provider": "TestTel", "bundle_name": name, "price_inr": inr, "billing_period": period,
+        "provider": "TestTel", "bundle_name": name, "price_inr": inr, "billing_period": period, "validity_days": days,
         "included_platforms": platforms, "source_url": "https://testtel.example.net/b", **PROV,
     }
 
@@ -75,6 +75,7 @@ def fixture_rows() -> dict[str, list[dict[str, str]]]:
         BUNDLES.filename: [
             bundle("Combo", "100", "month", "a;b"),
             bundle("Partial", "1200", "year", "a;c"),  # c has no prices
+            bundle("Day28", "280", "month", "a", days="28"),  # telecom-style 28-day validity
         ],
     }
 
@@ -112,7 +113,7 @@ def by_plan(rows: list[sqlite3.Row]) -> dict[tuple[str, str, str], sqlite3.Row]:
 def test_build_loads_every_row(conn) -> None:
     counts = {t: conn.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0]
               for t in ("platforms", "prices", "subscribers", "bundles", "bundle_platforms")}
-    assert counts == {"platforms": 3, "prices": 7, "subscribers": 4, "bundles": 2, "bundle_platforms": 4}
+    assert counts == {"platforms": 3, "prices": 7, "subscribers": 4, "bundles": 3, "bundle_platforms": 5}
 
 
 def test_empty_cells_become_null_not_zero(conn) -> None:
@@ -243,6 +244,12 @@ def test_bundle_vs_separate(conn) -> None:
     combo = rows["Combo"]
     # Separately: cheapest a (80/month) + cheapest b (50/month) = 130 vs bundle 100.
     assert (combo["separate_per_month"], combo["monthly_savings"], combo["complete_comparison"]) == (130.0, 30.0, 1)
+
+
+def test_day_based_bundle_uses_validity_days(conn) -> None:
+    day28 = {r["bundle_name"]: r for r in query(conn, "bundle_vs_separate")}["Day28"]
+    # ₹280 per 28 days = 10/day; a month is 365/12 = 30.4167 days -> ₹304.17, not ₹280.
+    assert day28["bundle_per_month"] == 304.17
 
 
 def test_bundle_with_unpriced_platform_is_flagged_incomplete(conn) -> None:
