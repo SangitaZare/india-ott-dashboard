@@ -1,0 +1,5 @@
+# Store text files with LF line endings in the repo so diffs stay clean on Windows and Linux (CI)
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.db binary
