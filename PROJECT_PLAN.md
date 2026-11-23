@@ -25,9 +25,9 @@ Build a portfolio-grade analytics project answering three questions:
 - **Done when:** repo runs `pytest` (0 tests OK) and structure matches.
 
 ### M1 — `feature/data-schema`
-- [ ] Define CSV schemas + `data/DATA_DICTIONARY.md`
-- [ ] `scripts/validate_data.py` enforcing CLAUDE.md §2 rules (required columns, valid `metric_type`, valid `source_type`, dates, URLs present, no negative prices)
-- [ ] Tests for the validator
+- [x] Define CSV schemas + `data/DATA_DICTIONARY.md`
+- [x] `scripts/validate_data.py` enforcing CLAUDE.md §2 rules (required columns, valid `metric_type`, valid `source_type`, dates, URLs present, no negative prices)
+- [x] Tests for the validator
 - **Schemas** (final definitions: `scripts/schemas.py` + `data/DATA_DICTIONARY.md`). Every file also has the provenance columns `as_of_date, accessed_date, source_name, source_url, notes`:
   - `platforms.csv`: platform_id, name, owner, model (SVOD/AVOD/hybrid), languages, has_live_cricket, has_free_tier, launch_year, official_plans_url
   - `prices.csv`: platform_id, plan_name, price_inr, billing_period (month/quarter/year), max_screens, max_quality (SD/HD/FHD/4K), has_ads, devices (mobile_only/all)

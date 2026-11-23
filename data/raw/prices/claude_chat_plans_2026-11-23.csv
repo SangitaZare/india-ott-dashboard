@@ -1,0 +1,18 @@
+platform,status,page_url,plan_name_as_shown,price_inr,struck_price_inr,billing_period,screens_or_devices,max_video_quality,ads_as_shown,devices,fine_print,checked_date
+JioHotstar,COULD NOT ACCESS,https://www.hotstar.com/in/subscribe,,,,,,,,,"Subscribe URL redirected to home page without login; no plans shown",2026-11-23
+Aha,OK,https://www.aha.video/subscription/viewplans,aha GOLD,999,1499,year,Devices: 3,4K UHD,Ads Free: yes,"TV, Mobile, Laptop","Button: ""aha Gold at INR 999""; no GST text",2026-11-23
+Aha,OK,https://www.aha.video/subscription/viewplans,Annual,499,699,year,Devices: 2,Full HD,Ads Free: no,"TV, Mobile, Laptop",no GST text,2026-11-23
+Aha,OK,https://www.aha.video/subscription/viewplans,Quarterly,199,299,3 months,Devices: 2,Full HD,Ads Free: no,"TV, Mobile, Laptop","Begins ₹67/Month",2026-11-23
+Aha,OK,https://www.aha.video/subscription/viewplans,Quarterly Mobile,99,149,3 months,not stated,HD (720p),Ads,Stream on mobile only,Autorenew @149,2026-11-23
+Aha,OK,https://www.aha.video/subscription/viewplans,Annual Premium,699,1299,year,not stated,Full HD (1080p),Ads-Free,not stated,,2026-11-23
+Hoichoi,OK,https://www.hoichoi.tv/plans,Annual,999,1499,year,Streams: 2 (Logged-in devices: 4),not stated,not stated,All devices,"Pay ₹999; Apply coupon code; no tax/auto-renew text on page",2026-11-23
+Hoichoi,OK,https://www.hoichoi.tv/plans,Quarterly,499,599,3 months,Streams: 1 (Logged-in devices: 2),not stated,not stated,All devices,no tax/auto-renew text on page,2026-11-23
+Sun NXT,OK,https://www.sunnxt.com/subscription/plans,Annual Platinum,1499,2299,year,4 Devices 4 Screens,4K + Dolby Vision,Ad-Free: yes,not stated,"Combo Plan - Ad-free 4K with Early Access (includes Sun NXT Shorts)",2026-11-23
+Sun NXT,OK,https://www.sunnxt.com/subscription/plans,Annual Premium,899,1499,year,3 Devices 2 Screens,Full HD (1080p),Ad-Free: yes,not stated,,2026-11-23
+Sun NXT,OK,https://www.sunnxt.com/subscription/plans,Quarterly lite,399,499,90 days,2 Devices 1 Screen,Full HD (1080p),with ads,not stated,"3 months of Movies, Shows & Live TV with ads",2026-11-23
+Planet Marathi,COULD NOT ACCESS,https://www.planetmarathi.com/,,,,,,,,,"Site shows only a contact card; undated official offer page about.planetmarathi.com/special-discount/ mentions ₹299 for 1 year (first year only) - not a current price list",2026-11-23
+Amazon Prime,OK,https://www.amazon.in/amazonprime,Prime Shopping Edition,399,499,year,no Prime Video,,,,No Prime Video benefit,2026-11-23
+Amazon Prime,OK,https://www.amazon.in/amazonprime,Prime Lite,799,,year,1,HD (720p),Watch on (with ads),Mobile or TV,"Prime Lite members need to upgrade to Prime to access Ad-Free",2026-11-23
+Amazon Prime,OK,https://www.amazon.in/amazonprime,Prime,299,,month,5 (including 2 TVs),"4K, HD/UHD (2160p)",Watch on (with ads); Buy ad-free at extra cost,"Mobile, TV, Laptop","Ad-free price not stated; auto-renew can be turned on/off",2026-11-23
+Amazon Prime,OK,https://www.amazon.in/gp/help/customer/display.html?nodeId=G34EUPKVMYFW8N2U,Quarterly Prime (3 months),599,,3 months,not stated,not stated,not stated,not stated,Listed on help page only,2026-11-23
+Amazon Prime,OK,https://www.amazon.in/amazonprime,Prime,1499,,year,5 (including 2 TVs),"4K, HD/UHD (2160p)",Watch on (with ads); Buy ad-free at extra cost,"Mobile, TV, Laptop","Some content, like TV and free ad-supported programming, will continue to show ads",2026-11-23
