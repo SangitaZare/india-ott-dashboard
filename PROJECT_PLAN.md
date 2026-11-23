@@ -60,6 +60,11 @@ Collect every figure with its exact metric type. Starting leads from research (f
   5. Bundle cost vs buying platforms separately
 - [x] Tests for calculations
 
+### M4b — `data/bundles` *(added 2026-11-23: Q5 needs bundle data)*
+- [x] Collect telecom/DTH bundles that include OTT platforms from **official provider pages only** (jio.com, airtel.in, tataplaybinge.com, etc.) *(21 Jio/Airtel/Vi plans; Tata Play Binge in TODO_verify)*
+- [x] Record validity in days in `validity_days` when it isn't a calendar month/quarter/year (e.g. 28 or 84 days)
+- [x] Note when the included OTT tier is cut down (e.g. mobile-only)
+
 ### M5 — `feature/analysis-notebook`
 - [ ] `notebooks/analysis.ipynb`: clean, explore, charts, written insights
 - [ ] Key insights section in plain business language (5 bullets max)
