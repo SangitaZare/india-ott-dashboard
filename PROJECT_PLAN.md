@@ -35,20 +35,20 @@ Build a portfolio-grade analytics project answering three questions:
   - `bundles.csv`: provider (Jio/Airtel/Tata Play Binge/etc.), bundle_name, price_inr, billing_period, included_platforms
 
 ### M2 — `data/platforms-and-prices`
-- [ ] Collect current plans from **official plan pages only** for: Netflix, Amazon Prime Video, JioHotstar, SonyLIV, ZEE5, Aha, Hoichoi, Sun NXT, Planet Marathi (add others if easy)
-- [ ] Record accessed date on every row; unverifiable rows → `TODO_verify.md`
-- [ ] Price anchors from research to **re-verify** (do not copy blindly): Netflix ₹149/199/499/649 per month; JioHotstar Mobile ₹79/mo or ₹499/yr, Super ₹149/mo or ₹1,099/yr, Premium ₹2,199/yr; Prime ₹299/mo or ₹1,499/yr; SonyLIV Premium ₹399/mo or ₹1,499/yr; ZEE5 All Access ₹1,499/yr; Aha ₹149 / ₹699; Hoichoi ₹149 / ₹899
+- [x] Collect current plans from **official plan pages only** for: Netflix, Amazon Prime Video, JioHotstar, SonyLIV, ZEE5, Aha, Hoichoi, Sun NXT, Planet Marathi (add others if easy) *(7 of 9 done; JioHotstar and Planet Marathi in TODO_verify)*
+- [x] Record accessed date on every row; unverifiable rows → `TODO_verify.md`
+- [x] Price anchors from research to **re-verify** (do not copy blindly): Netflix ₹149/199/499/649 per month; JioHotstar Mobile ₹79/mo or ₹499/yr, Super ₹149/mo or ₹1,099/yr, Premium ₹2,199/yr; Prime ₹299/mo or ₹1,499/yr; SonyLIV Premium ₹399/mo or ₹1,499/yr; ZEE5 All Access ₹1,499/yr; Aha ₹149 / ₹699; Hoichoi ₹149 / ₹899
 
 ### M3 — `data/subscribers`
 Collect every figure with its exact metric type. Starting leads from research (find and cite the original article for each):
-- [ ] Ormax OTT Audience Report 2026 (Sept 2026): 664.9M OTT audience; 172.6M active paid subscriptions (up from 148.2M)
-- [ ] EY-FICCI M&E report (March 2026): 143M paying households, 216M video OTT subscriptions in 2025; 100M+ households via bundles
-- [ ] Media Partners Asia, Asia Video Content Dynamics 2026: JioHotstar 180M+ paying subscribers, 58% premium VOD viewing share
-- [ ] HSBC note (Jan 2026, via India Dispatch / BW Businessworld): JioHotstar ~300M, Prime Video ~65M, Netflix ~20M paying subscribers; only 24% of OTT users pay
-- [ ] JioStar announcement (June 2025): 300M subscribers
-- [ ] Business Standard (10 Jan 2026): Netflix "more than 16 million subscribers, about 50 million viewers"; ~6% of 272M OTT subscribers in 2025
-- [ ] JustWatch quarterly SVOD shares → `engagement_share_pct` only, never subscribers
-- [ ] Stats websites (Demandsage etc.) → `stats_website`, low credibility
+- [x] Ormax OTT Audience Report 2026 (Sept 2026): 664.9M OTT audience; 172.6M active paid subscriptions (up from 148.2M)
+- [x] EY-FICCI M&E report (March 2026): 143M paying households, 216M video OTT subscriptions in 2025; 100M+ households via bundles
+- [x] Media Partners Asia, Asia Video Content Dynamics 2026: JioHotstar 180M+ paying subscribers, 58% premium VOD viewing share
+- [x] HSBC note (Jan 2026, via India Dispatch / BW Businessworld): JioHotstar ~300M, Prime Video ~65M, Netflix ~20M paying subscribers; only 24% of OTT users pay
+- [x] JioStar announcement (June 2025): 300M subscribers
+- [x] Business Standard (10 Jan 2026): Netflix "more than 16 million subscribers, about 50 million viewers"; ~6% of 272M OTT subscribers in 2025
+- [x] JustWatch quarterly SVOD shares → `engagement_share_pct` only, never subscribers
+- [ ] Stats websites (Demandsage etc.) → `stats_website`, low credibility *(skipped: not needed to show the disagreement)*
 
 ### M4 — `feature/database-and-sql`
 - [ ] `scripts/build_db.py`: CSVs → `build/ott.db`
