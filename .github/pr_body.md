@@ -15,7 +15,7 @@
 
 ## Checklist
 - [ ] `python -m pytest -q` passes
-- [ ] `python scripts/validate_data.py` passes (once it exists)
+- [ ] `python scripts/validate_data.py` passes
 - [ ] Every new number has a source URL, `as_of_date` and `accessed_date`
 - [ ] Prices come only from official platform pages
 - [ ] Unverified values are listed in `data/TODO_verify.md`

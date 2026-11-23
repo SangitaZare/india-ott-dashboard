@@ -1,0 +1,4 @@
+[tool.pytest.ini_options]
+# Lets tests `import validate_data` the same way the scripts import each other.
+pythonpath = ["scripts"]
+testpaths = ["tests"]
