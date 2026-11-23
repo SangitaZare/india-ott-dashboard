@@ -35,13 +35,16 @@ Every row records where its numbers came from (CLAUDE.md §2, rule 2).
 |---|---|---|---|
 | `platform_id` | text | yes | Short unique key used by the other files, e.g. `netflix`, `jiohotstar`. Lower-case, no spaces. |
 | `name` | text | yes | Display name. |
-| `owner` | text | yes | Parent company. |
-| `model` | `SVOD` / `AVOD` / `hybrid` | yes | SVOD = paid subscription only; AVOD = free with ads; hybrid = both. |
-| `languages` | list | yes | Main content languages, `;`-separated. |
-| `has_live_cricket` | bool | yes | Streams live cricket in India. |
-| `has_free_tier` | bool | yes | Some content is watchable without paying. |
+| `owner` | text | no* | Parent company. |
+| `model` | `SVOD` / `AVOD` / `hybrid` | no* | SVOD = paid subscription only; AVOD = free with ads; hybrid = both. |
+| `languages` | list | no* | Main content languages, `;`-separated. |
+| `has_live_cricket` | bool | no* | Streams live cricket in India. |
+| `has_free_tier` | bool | no* | Some content is watchable without paying. |
 | `launch_year` | int | no | Year of India launch. |
 | `official_plans_url` | URL | yes | The platform's own plans page. **Its domain decides which websites are accepted as price sources** (see `prices.csv`). |
+
+\* Empty is allowed only while a value is unverified (the validator shows a warning).
+If a row's facts come from several pages, `source_url` holds the main one and `notes` lists the others.
 
 ## `prices.csv` — one row per plan, per billing period, per date checked
 
@@ -53,8 +56,8 @@ Every row records where its numbers came from (CLAUDE.md §2, rule 2).
 | `billing_period` | `month` / `quarter` / `year` | yes | What `price_inr` pays for. |
 | `max_screens` | int | no* | Number of devices that can stream **at the same time**. |
 | `max_quality` | `SD` / `HD` / `FHD` / `4K` | no* | Best video quality. SD ≈ 480p, HD = 720p, FHD = 1080p, 4K = 2160p. |
-| `has_ads` | bool | yes | The plan shows ads. Use `notes` for "limited ads" or "ads on live sport". |
-| `devices` | `mobile_only` / `all` | yes | Whether the plan works on TVs and laptops or only on phones and tablets. |
+| `has_ads` | bool | no* | The plan shows ads. Use `notes` for "limited ads" or "ads on live sport". |
+| `devices` | `mobile_only` / `all` | no* | Whether the plan works on TVs and laptops or only on phones and tablets. |
 
 \* Empty is allowed only while a value is unverified (the validator shows a warning).
 
