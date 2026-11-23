@@ -112,5 +112,6 @@ These measure **different things**. They must never be added together or compare
 | `provider` | text | yes | e.g. `Jio`, `Airtel`, `Tata Play Binge`. |
 | `bundle_name` | text | yes | Name as shown by the provider. |
 | `price_inr` | number ≥ 0 | no* | Price for one billing period. |
-| `billing_period` | `month` / `quarter` / `year` | yes | What `price_inr` pays for. Pick the closest one, and explain odd validity periods (e.g. 84 days) in `notes`. |
+| `billing_period` | `month` / `quarter` / `year` | yes | What `price_inr` pays for. For day-based plans, pick the closest one (28 days → `month`, 84 days → `quarter`). |
+| `validity_days` | int ≥ 1 | no | Validity in days as shown by the provider (e.g. `28`, `84`). Leave blank for true calendar periods. When filled, analysis converts the price to ₹/month with `price × 365 / 12 / validity_days`, because a 28-day plan is bought 13 times a year, not 12. |
 | `included_platforms` | list | yes | `platform_id`s from `platforms.csv`, `;`-separated. Note in `notes` if the included tier is a cut-down version (e.g. mobile-only). |
