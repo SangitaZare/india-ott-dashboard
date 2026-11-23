@@ -325,3 +325,36 @@ def test_cli_exit_codes(tmp_path: Path) -> None:
     assert main(["--data-dir", str(good)]) == 0
     (good / PRICES.filename).unlink()
     assert main(["--data-dir", str(good)]) == 1
+
+
+@pytest.mark.parametrize(
+    "filename, column",
+    [
+        (PLATFORMS.filename, "owner"),
+        (PLATFORMS.filename, "model"),
+        (PLATFORMS.filename, "languages"),
+        (PLATFORMS.filename, "has_live_cricket"),
+        (PLATFORMS.filename, "has_free_tier"),
+        (PRICES.filename, "has_ads"),
+        (PRICES.filename, "devices"),
+    ],
+)
+def test_unverified_facts_are_a_warning_not_an_error(tmp_path: Path, filename: str, column: str) -> None:
+    """A plan page that doesn't say whether there are ads is left blank, not guessed."""
+    report = run_with_change(tmp_path, filename, **{column: ""})
+    assert report.ok
+    assert any(f"'{column}' is empty" in w for w in report.warnings)
+
+
+@pytest.mark.parametrize(
+    "filename, column",
+    [
+        (PLATFORMS.filename, "platform_id"),
+        (PLATFORMS.filename, "name"),
+        (PLATFORMS.filename, "official_plans_url"),
+        (PRICES.filename, "plan_name"),
+        (PRICES.filename, "billing_period"),
+    ],
+)
+def test_identity_columns_stay_required(tmp_path: Path, filename: str, column: str) -> None:
+    assert_error(run_with_change(tmp_path, filename, **{column: ""}), f"'{column}' is required")
