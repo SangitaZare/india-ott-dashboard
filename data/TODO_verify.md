@@ -37,6 +37,20 @@ Any value we could not confirm from an acceptable source goes here instead of be
 | prime_video Prime (month, year), Prime Lite | max_screens | Page says "5 (including 2 TVs)" / "1" devices - not stated whether at the same time | Prime Video help page on simultaneous streams |
 | prime_video Quarterly Prime (3 months) | max_screens, max_quality, has_ads, devices | Help page lists the price only | Same features as Prime? Confirm on amazon.in |
 
+## subscribers.csv
+
+These rows are entered but cite a second-hand or weak source. Replace each source when the original is found.
+
+| Row | Issue | What's needed |
+|---|---|---|
+| HSBC: jiohotstar 300M+, prime_video 65M, netflix 20M | Relayed by an entertainment site (Ragalahari); HSBC report date unknown, so `as_of_date` = article date | Original HSBC note, or India Dispatch / BW Businessworld coverage with the report date |
+| netflix 16M subscribers / 50M viewers | From a podcast transcript (The Core); Business Standard article (2026-01-10) paywalled | Business Standard article text, or a Netflix statement |
+| jiohotstar 300M (Aug 2025), 451M MAU, 260M+ subscriptions | Company statements, read via news reports | Official RIL AGM press release / JioStar newsroom |
+| jiohotstar MPA 180M+ / 58% | Reported by Advanced Television; period not stated (assumed 2025) | MPA press release with the reference period |
+| netflix / prime_video JustWatch 22% | Reported by Inc42 | JustWatch's own Q2 2026 India report |
+
+Not entered (see `data/raw/subscribers/collected_2026-11-23.md`): HSBC "24% of OTT users pay" (a share of users, not one of our metric types); EY "100M+ households via bundles" (a subset of the 143M total).
+
 ## Hand-check still to do
 
 All rows marked "Read via Claude chat" in `notes` (Aha, Hoichoi, Sun NXT, Prime Video and the
