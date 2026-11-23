@@ -17,22 +17,22 @@ Build a portfolio-grade analytics project answering three questions:
 ## Milestones (one branch + one PR each)
 
 ### M0 — `chore/project-setup`
-- [ ] Create repo structure from `CLAUDE.md` §4
-- [ ] `.gitignore` (Python, Node, .NET, `.env`, `build/`)
-- [ ] `requirements.txt` (pandas, pytest, jupyter)
-- [ ] `.github/pr_body.md` PR template
-- [ ] Minimal `README.md` (title, one-line description, "work in progress")
+- [x] Create repo structure from `CLAUDE.md` §4
+- [x] `.gitignore` (Python, Node, .NET, `.env`, `build/`)
+- [x] `requirements.txt` (pandas, pytest, jupyter)
+- [x] `.github/pr_body.md` PR template
+- [x] Minimal `README.md` (title, one-line description, "work in progress")
 - **Done when:** repo runs `pytest` (0 tests OK) and structure matches.
 
 ### M1 — `feature/data-schema`
 - [ ] Define CSV schemas + `data/DATA_DICTIONARY.md`
 - [ ] `scripts/validate_data.py` enforcing CLAUDE.md §2 rules (required columns, valid `metric_type`, valid `source_type`, dates, URLs present, no negative prices)
 - [ ] Tests for the validator
-- **Schemas:**
+- **Schemas** (final definitions: `scripts/schemas.py` + `data/DATA_DICTIONARY.md`). Every file also has the provenance columns `as_of_date, accessed_date, source_name, source_url, notes`:
   - `platforms.csv`: platform_id, name, owner, model (SVOD/AVOD/hybrid), languages, has_live_cricket, has_free_tier, launch_year, official_plans_url
-  - `prices.csv`: platform_id, plan_name, price_inr, billing_period (month/quarter/year), max_screens, max_quality (HD/FHD/4K), has_ads, devices (mobile_only/all), as_of_date, accessed_date, source_url
-  - `subscribers.csv`: platform_id, value_millions, value_low, value_high, metric_type, scope (India), as_of_date, accessed_date, source_name, source_type, source_url, notes
-  - `bundles.csv`: provider (Jio/Airtel/Tata Play Binge/etc.), bundle_name, price_inr, billing_period, included_platforms, as_of_date, accessed_date, source_url
+  - `prices.csv`: platform_id, plan_name, price_inr, billing_period (month/quarter/year), max_screens, max_quality (SD/HD/FHD/4K), has_ads, devices (mobile_only/all)
+  - `subscribers.csv`: platform_id (or `market_total`), value, value_low, value_high, unit (millions/percent), metric_type, scope (India), source_type
+  - `bundles.csv`: provider (Jio/Airtel/Tata Play Binge/etc.), bundle_name, price_inr, billing_period, included_platforms
 
 ### M2 — `data/platforms-and-prices`
 - [ ] Collect current plans from **official plan pages only** for: Netflix, Amazon Prime Video, JioHotstar, SonyLIV, ZEE5, Aha, Hoichoi, Sun NXT, Planet Marathi (add others if easy)
