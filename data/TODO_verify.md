@@ -56,7 +56,7 @@ Not entered (see `data/raw/subscribers/collected_2026-11-23.md`): HSBC "24% of O
 | Row | Issue | What's needed |
 |---|---|---|
 | Tata Play Binge (4 / 13 / 35 OTT apps, "starting from" ₹149 / ₹199 / ₹399) | Not entered: app names per tier and exact plans are behind an OTP login; prices are "starting from" | Log in (or use the app) and record each plan's price and app list |
-| Airtel Xstream Play bundles (₹100, ₹449, ₹1199) | Page says "18+ OTTs such as …", so only the named apps are in `included_platforms` | Full Xstream Play Premium app list from airtel.in |
+| Airtel Xstream Play bundles (₹100, ₹200, ₹279, ₹449, ₹1199) | Page says "18+ OTTs such as …", so only the named apps are in `included_platforms` | Full Xstream Play Premium app list from airtel.in |
 | Airtel ₹598 / ₹1729 "Xstream Play Premium" | Apps not named in that row | Same as above |
 | All Airtel and Vi rows | Prices are for the Maharashtra & Goa circle | Check whether other circles differ |
 | 18 of 21 bundles include JioHotstar | No JioHotstar prices yet, so `bundle_vs_separate` marks them incomplete | JioHotstar prices (see above) |
