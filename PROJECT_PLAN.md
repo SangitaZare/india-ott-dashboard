@@ -51,14 +51,14 @@ Collect every figure with its exact metric type. Starting leads from research (f
 - [ ] Stats websites (Demandsage etc.) → `stats_website`, low credibility *(skipped: not needed to show the disagreement)*
 
 ### M4 — `feature/database-and-sql`
-- [ ] `scripts/build_db.py`: CSVs → `build/ott.db`
-- [ ] `sql/analysis.sql` answering:
+- [x] `scripts/build_db.py`: CSVs → `build/ott.db`
+- [x] `sql/analysis.sql` answering:
   1. Min / max / spread of each platform's subscriber estimates, grouped by metric_type
   2. Cheapest plan per platform; ₹ per screen per month
   3. Annual vs monthly savings per platform (%)
   4. Cheapest ad-free 4K option
   5. Bundle cost vs buying platforms separately
-- [ ] Tests for calculations
+- [x] Tests for calculations
 
 ### M5 — `feature/analysis-notebook`
 - [ ] `notebooks/analysis.ipynb`: clean, explore, charts, written insights
