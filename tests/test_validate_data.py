@@ -198,7 +198,7 @@ def test_blank_validity_days_gives_no_warning(tmp_path: Path) -> None:
     assert report.warnings == []
 
 
-@pytest.mark.parametrize("bad, message", [("0", "at least 1"), ("-28", "whole number"), ("28.5", "whole number")])
+@pytest.mark.parametrize("bad, message", [("0", "at least 1"), ("00", "at least 1"), ("-28", "whole number"), ("28.5", "whole number")])
 def test_invalid_validity_days(tmp_path: Path, bad: str, message: str) -> None:
     assert_error(run_with_change(tmp_path, BUNDLES.filename, validity_days=bad), message)
 

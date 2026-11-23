@@ -245,7 +245,8 @@ def check_bundle_platforms(rows: list[Row], platform_ids: set[str], report: Repo
 
 def check_bundle_validity(rows: list[Row], report: Report) -> None:
     for index, row in enumerate(rows):
-        if row.get("validity_days", "") == "0":
+        value = row.get("validity_days", "")
+        if value.isdigit() and int(value) == 0:  # "0" and "00" alike; non-numbers are caught by check_cell
             report.error(location(BUNDLES, index), "validity_days must be at least 1")
 
 
