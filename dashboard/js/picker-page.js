@@ -150,8 +150,10 @@
     if (params.has("budget")) $("budget").value = params.get("budget");
     const flags = { cricket: "cricket", tv: "needs-tv", ads: "ads-ok", unverified: "allow-unverified" };
     for (const [key, id] of Object.entries(flags)) if (params.has(key)) $(id).checked = params.get(key) === "1";
-    const wanted = new Set((params.get("lang") || "").split(",").filter(Boolean));
-    for (const box of document.querySelectorAll("#languages input")) box.checked = wanted.has(box.value);
+    const boxes = [...document.querySelectorAll("#languages input")];
+    // Hindi is pre-ticked by default; a ?lang= in the address overrides it (see Picker.initialLanguages).
+    const wanted = new Set(Picker.initialLanguages(boxes.map((b) => b.value), params.get("lang")));
+    for (const box of boxes) box.checked = wanted.has(box.value);
   }
 
   async function start() {

@@ -145,5 +145,17 @@
     return { status: "ok", best: affordable[0], alternatives: affordable.slice(1, 3), cheapestValid, excluded };
   }
 
-  return { pickPlans, checkPlan, platformOffers, YES, NO, UNKNOWN };
+  /** Most visitors want Hindi, so it is ticked on first load when the data offers it.
+   *  A ?lang= value in the address always wins - even an empty one (meaning "no language"). */
+  const DEFAULT_LANGUAGE = "Hindi";
+
+  function initialLanguages(available, langParam) {
+    if (langParam != null) {
+      const wanted = langParam.split(",").map((s) => s.trim()).filter(Boolean);
+      return available.filter((lang) => wanted.includes(lang));
+    }
+    return available.includes(DEFAULT_LANGUAGE) ? [DEFAULT_LANGUAGE] : [];
+  }
+
+  return { pickPlans, checkPlan, platformOffers, initialLanguages, YES, NO, UNKNOWN };
 });
