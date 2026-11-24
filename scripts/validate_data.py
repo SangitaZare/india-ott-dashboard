@@ -235,12 +235,31 @@ def check_subscriber_values(rows: list[Row], report: Report) -> None:
             report.error(where, "a percentage cannot be above 100")
 
 
+def parse_tiers(value: str) -> dict[str, str] | None:
+    """'jiohotstar=Mobile;netflix=Basic' -> {'jiohotstar': 'Mobile', 'netflix': 'Basic'}; None if malformed."""
+    tiers: dict[str, str] = {}
+    for item in value.split(LIST_SEPARATOR):
+        platform, sep, tier = item.partition("=")
+        if not sep or not platform.strip() or not tier.strip() or platform.strip() in tiers:
+            return None
+        tiers[platform.strip()] = tier.strip()
+    return tiers
+
+
 def check_bundle_platforms(rows: list[Row], platform_ids: set[str], report: Report) -> None:
     for index, row in enumerate(rows):
-        for item in row.get("included_platforms", "").split(LIST_SEPARATOR):
-            item = item.strip()
-            if item and item not in platform_ids:
-                report.error(location(BUNDLES, index), f"included platform '{item}' is not in platforms.csv")
+        where = location(BUNDLES, index)
+        included = [item.strip() for item in row.get("included_platforms", "").split(LIST_SEPARATOR) if item.strip()]
+        for item in included:
+            if item not in platform_ids:
+                report.error(where, f"included platform '{item}' is not in platforms.csv")
+        if not row.get("included_tiers"):
+            continue  # an empty required cell is already reported by check_rows
+        tiers = parse_tiers(row["included_tiers"])
+        if tiers is None:
+            report.error(where, "included_tiers must look like 'platform_id=Tier;platform_id=Tier' with each platform once")
+        elif set(tiers) != set(included):
+            report.error(where, "included_tiers must give exactly one tier for every platform in included_platforms")
 
 
 def check_bundle_validity(rows: list[Row], report: Report) -> None:
