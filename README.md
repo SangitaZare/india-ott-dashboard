@@ -90,7 +90,7 @@ Columns and rules: [data dictionary](data/DATA_DICTIONARY.md). Original readings
 
 - **One day's prices.** Plans were checked on 23 Nov 2026 and change often. Telecom prices are for one circle (Maharashtra & Goa).
 - **Gaps:** no verified prices yet for **JioHotstar** or **Planet Marathi**, and Tata Play Binge plans sit behind a login. 15 of 21 bundles can't be compared yet because they include JioHotstar.
-- **Many plan details aren't stated** on official pages: screens at once (36 of 48 plans), supported devices, languages for the big platforms. These are left blank, which limits the per-screen comparison and the picker.
+- **Many plan details aren't stated** on official pages: screens at once (36 of 48 plans), supported devices, and the content languages of SonyLIV and ZEE5. Live cricket is verified only for JioHotstar and SonyLIV. These are left blank, which limits the per-screen comparison and the picker.
 - **Some subscriber figures are second-hand:** HSBC via an entertainment site with no report date; Netflix's 16M via a podcast transcript. Each row says so in `notes`.
 - **Not every value has been checked by hand yet.** Rows collected through AI-assisted browsing say so in `notes`. See [`TODO_verify.md`](data/TODO_verify.md) for everything still open.
 
