@@ -26,6 +26,7 @@ EXPECTED_FILES = [
     ".gitignore",
     ".github/pr_body.md",
     ".github/workflows/ci.yml",
+    ".github/workflows/pages.yml",
 ]
 
 

@@ -1,6 +1,6 @@
 # LinkedIn post draft
 
-> Draft only. Review it, add the live dashboard link once it is deployed (M11), and post it yourself.
+> Draft only. Review it and post it yourself.
 
 ---
 
@@ -25,6 +25,6 @@ So I built a data project around it:
 The biggest lesson: a good analysis says "unknown" when the data doesn't know.
 
 Code and data: github.com/SangitaZare/india-ott-dashboard
-[Live dashboard: add link after deployment]
+Live dashboard: sangitazare.github.io/india-ott-dashboard
 
 #DataAnalytics #SQL #Python

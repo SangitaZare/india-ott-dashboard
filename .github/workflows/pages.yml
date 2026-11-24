@@ -1,0 +1,51 @@
+# Publishes the static dashboard (the dashboard/ folder only) to GitHub Pages
+# on every push to main: https://sangitazare.github.io/india-ott-dashboard/
+# The data, notebook, scripts and tests are not published - only what the dashboard needs.
+name: Deploy dashboard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "dashboard/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:   # lets you re-publish by hand from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two deployments at once; let a running one finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Check the dashboard has its data
+        run: |
+          for f in index.html cost.html picker.html data/analysis.json data/meta.json; do
+            test -s "dashboard/$f" || { echo "missing dashboard/$f"; exit 1; }
+          done
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload the dashboard folder
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dashboard
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
