@@ -189,42 +189,70 @@
   // bundles.csv notes start with "Data pack only" for data add-ons; everything else is a full prepaid plan.
   const bundleType = (b) => (b.notes.startsWith("Data pack only") ? "data" : "full");
 
+  /** "jiohotstar Mobile" -> readable reason why that app can't be priced like-for-like. */
+  function blockerText(code) {
+    const [platform, ...rest] = code.split(" ");
+    const tier = rest.join(" ");
+    return tier === "unstated"
+      ? [`${names[platform]} (tier not named)`, "the provider doesn't say which plan it gives (often the app comes through JioTV, Airtel Xstream Play or Vi Movies & TV)"]
+      : [`${names[platform]} ${tier}`, `no price for this tier on ${names[platform]}'s official web plans page`];
+  }
+
   function renderBundles(analysisRows, bundles, theme, checked) {
     const typeOf = Object.fromEntries(bundles.map((b) => [`${b.provider}|${b.bundle_name}`, bundleType(b)]));
     const rows = analysisRows.map((r) => ({ ...r, type: typeOf[`${r.provider}|${r.bundle_name}`] }));
     const complete = rows.filter((r) => r.complete_comparison === 1);
-    const incomplete = rows.length - complete.length;
 
-    const callout = document.getElementById("bundle-callout");
-    callout.replaceChildren(
+    document.getElementById("bundle-callout").replaceChildren(
       el("strong", { text: "Read this first. " }),
-      el("span", { text: "Full prepaid plans also pay for calls and data you'd buy anyway, so only data-only packs are a like-for-like comparison. "
-        + "Bundled apps are often a cut-down tier (e.g. JioHotstar Mobile), while \"separately\" uses each platform's cheapest web plan, so savings are an upper bound."
-        + (incomplete ? ` ${incomplete} of ${rows.length} bundles include a platform without a verified price, so they are not shown yet.` : "") }),
+      el("span", { text: "Each bundle is compared with buying the same tier of each app separately - e.g. \"JioHotstar Mobile\" with JioHotstar's Mobile plan, never with a different plan. "
+        + "Full prepaid plans also pay for calls and data you'd buy anyway. "
+        + `Only ${complete.length} of ${rows.length} bundles can be compared like-for-like today; the list below the chart says why.` }),
     );
+
+    // What blocks the rest: one line per missing tier, with how many bundles it blocks.
+    const counts = new Map();
+    for (const r of rows.filter((x) => x.complete_comparison !== 1)) {
+      for (const code of (r.unmatched_tiers || "").split("; ").filter(Boolean)) counts.set(code, (counts.get(code) || 0) + 1);
+    }
+    document.getElementById("bundle-blockers").replaceChildren(...[...counts.entries()]
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .map(([code, n]) => {
+        const [title, why] = blockerText(code);
+        return el("li", {}, [el("strong", { text: `${title}: ` }), el("span", { text: `${why}. Blocks ${n} bundle${n > 1 ? "s" : ""}.` })]);
+      }));
 
     const bundleColor = cssVar("--series-1");
     const separateColor = cssVar("--series-2");
-    legend("bundle-legend", [["Bundle price", bundleColor], ["Buying the included apps separately", separateColor]]);
+    legend("bundle-legend", [["Bundle price", bundleColor], ["Buying the same tiers separately", separateColor]]);
     const canvas = document.getElementById("bundle-chart");
+    const box = document.getElementById("bundle-chart-box");
+    const legendEl = document.getElementById("bundle-legend");
     let chart = null;
 
     function draw(type) {
       const list = complete.filter((r) => r.type === type).sort((x, y) => y.monthly_savings - x.monthly_savings);
+      const total = rows.filter((r) => r.type === type).length;
+      const kind = type === "data" ? "data-only packs" : "full prepaid plans";
+      if (chart) { chart.destroy(); chart = null; }
+      box.hidden = legendEl.hidden = list.length === 0;
+      if (!list.length) {
+        document.getElementById("bundle-note").textContent =
+          `None of the ${total} ${kind} can be compared like-for-like yet: every one includes an app tier without an official price (see the list below).`;
+        return;
+      }
       const labels = list.map((r) => `${r.provider} ${r.bundle_name.replace(" (no name shown)", "")}`);
-      document.getElementById("bundle-chart-box").style.height = rowHeight(list.length, 56);
-      describe(canvas, list.map((r, i) => `${labels[i]}: bundle ${formatRupees(r.bundle_per_month)}/month vs ${formatRupees(r.separate_per_month)} separately`).join("; "));
-      if (chart) chart.destroy();
-      const shown = labels.map((l) => wrapLabel(l, labelChars()));
+      box.style.height = rowHeight(list.length, 56);
+      describe(canvas, list.map((r, i) => `${labels[i]}: bundle ${formatRupees(r.bundle_per_month)}/month vs ${formatRupees(r.separate_per_month)} for the same tiers separately`).join("; "));
       chart = new Chart(canvas, {
         data: {
-          labels: shown,
+          labels: labels.map((l) => wrapLabel(l, labelChars())),
           datasets: [
             { type: "bar", label: "Gap", data: list.map((r) => [Math.min(r.bundle_per_month, r.separate_per_month), Math.max(r.bundle_per_month, r.separate_per_month)]),
               backgroundColor: theme.grid, barPercentage: 0.12, categoryPercentage: 1, order: 2 },
             { type: "line", label: "Bundle price", data: list.map((r, i) => ({ x: r.bundle_per_month, y: i })), showLine: false,
               pointRadius: 7, pointHoverRadius: 9, pointHitRadius: 14, pointBackgroundColor: bundleColor, pointBorderColor: theme.surface, pointBorderWidth: 2, order: 1 },
-            { type: "line", label: "Buying separately", data: list.map((r, i) => ({ x: r.separate_per_month, y: i })), showLine: false,
+            { type: "line", label: "Same tiers separately", data: list.map((r, i) => ({ x: r.separate_per_month, y: i })), showLine: false,
               pointRadius: 7, pointHoverRadius: 9, pointHitRadius: 14, pointBackgroundColor: separateColor, pointBorderColor: theme.surface, pointBorderWidth: 2, order: 1 },
           ],
         },
@@ -244,10 +272,10 @@
           },
         },
       });
-      const saving = list.filter((r) => r.monthly_savings > 0);
+      const saving = list.filter((r) => r.monthly_savings > 0).length;
       document.getElementById("bundle-note").textContent = type === "data"
-        ? `${saving.length} of ${list.length} data-only packs with complete prices are cheaper than buying the same apps directly. The catch: bundled apps are usually the mobile tier, or come through an aggregator app.`
-        : "These prices include unlimited calls and daily data, so they look expensive next to OTT alone. That's not a like-for-like comparison.";
+        ? `${saving} of the ${list.length} comparable data-only packs cost less than buying the same tiers directly.`
+        : `${saving} of the ${list.length} comparable full plans cost less than the same apps alone - but these prices also include unlimited calls and daily data, so this is not like-for-like.`;
     }
 
     for (const button of document.querySelectorAll(".toggle button")) {
@@ -258,7 +286,10 @@
     }
     document.getElementById("bundle-source").textContent =
       `Bundle prices from jio.com, airtel.in and myvi.in (Maharashtra & Goa circle), checked ${formatDate(checked)}. 28- and 84-day plans are converted at 365/12 days per month.`;
-    draw("data");
+    // Open on data-only packs (the fair comparison) - unless none of them is comparable yet.
+    const first = complete.some((r) => r.type === "data") || !complete.length ? "data" : "full";
+    for (const b of document.querySelectorAll(".toggle button")) b.setAttribute("aria-pressed", String(b.dataset.type === first));
+    draw(first);
   }
 
   // --- Plan table ---------------------------------------------------------------------------
