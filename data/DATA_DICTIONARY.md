@@ -1,6 +1,7 @@
 # Data Dictionary
 
-This project uses four CSV files in `data/`. The machine-readable definitions are in
+This project uses four CSV files in `data/` (the source data) plus derived data built from them
+(database views, analysis queries, dashboard JSON - see [Derived data](#derived-data)). The machine-readable definitions are in
 [`scripts/schemas.py`](../scripts/schemas.py), and [`scripts/validate_data.py`](../scripts/validate_data.py) checks every file against them.
 Run `python scripts/validate_data.py` after any data change.
 
@@ -115,3 +116,61 @@ These measure **different things**. They must never be added together or compare
 | `billing_period` | `month` / `quarter` / `year` | yes | What `price_inr` pays for. For day-based plans, pick the closest one (28 days → `month`, 84 days → `quarter`). |
 | `validity_days` | int ≥ 1 | no | Validity in days as shown by the provider (e.g. `28`, `84`). Leave blank for true calendar periods. When filled, analysis converts the price to ₹/month with `price × 365 / 12 / validity_days`, because a 28-day plan is bought 13 times a year, not 12. |
 | `included_platforms` | list | yes | `platform_id`s from `platforms.csv`, `;`-separated. Note in `notes` if the included tier is a cut-down version (e.g. mobile-only). |
+
+**`notes` convention for bundles:** every bundle's notes start with either `Data pack only` (a data add-on that needs
+a base plan) or `Full prepaid plan` (includes calls and data, so its price is not for OTT alone). The cost page uses this
+prefix to show only like-for-like comparisons by default; a test checks every bundle has one.
+
+`included_platforms` lists only apps that are in `platforms.csv` **and named on the provider's page**. Other apps
+(e.g. YouTube Premium, Lionsgate Play) are listed in `notes`.
+
+---
+
+## Supporting files in `data/`
+
+| File | What |
+|---|---|
+| [`TODO_verify.md`](TODO_verify.md) | Every value left blank or taken from a second-hand source, grouped by file, with what is needed to fix it |
+| [`raw/`](raw/) | Original readings before they were entered: plan-page notes, Claude-chat CSVs, subscriber source quotes. Never edited after saving. |
+
+---
+
+## Derived data
+
+Nothing below is edited by hand. It is rebuilt from the CSVs, so a data change flows through everywhere.
+
+### Database: `build/ott.db` (built by `scripts/build_db.py`, not committed)
+
+The build validates the CSVs first and refuses invalid data. Types: numbers are `REAL`/`INTEGER`, booleans are `0`/`1`, and **empty cells are `NULL`** (unknown, never 0).
+
+| Table / view | What |
+|---|---|
+| `platforms`, `prices`, `subscribers`, `bundles` | One table per CSV, same columns |
+| `bundle_platforms` | One row per (bundle, included platform): the `;` list in `bundles.included_platforms`, split so SQL can join on it |
+| `current_prices` (view) | The newest row per plan + billing period (prices keep history) |
+| `monthly_prices` (view) | `current_prices` with `months` (1 / 3 / 12) and `price_per_month` = `price_inr / months`. Plans with no price are excluded. |
+
+### Analysis queries: [`sql/analysis.sql`](../sql/analysis.sql)
+
+Each query starts with `-- name: <id>`. The notebook, the dashboard and the tests all run these, so every calculation exists once.
+Run them with `python scripts/run_analysis.py [name ...]`.
+
+| Query | Answers | Key output columns |
+|---|---|---|
+| `subscriber_estimate_spread` | How far apart are estimates of the **same** metric for a platform? | `min_estimate`, `max_estimate`, `spread`, `spread_pct` (= spread ÷ min). A range uses its low end for the min and its high end for the max. |
+| `price_per_screen` | ₹ per screen per month for every current plan | `price_per_month`, `price_per_screen_per_month` (`NULL` when screens are unknown) |
+| `cheapest_plan_per_platform` | Cheapest way into each platform | `price_per_month` (ties kept) |
+| `annual_vs_monthly_savings` | Saving from paying yearly, for plans sold both ways | `twelve_months_cost`, `yearly_savings_inr`, `savings_pct` = (12 × monthly − yearly) ÷ (12 × monthly) |
+| `cheapest_ad_free_4k` | Cheapest 4K plans with no ads | `price_per_month`. Plans with unknown ads or quality are excluded. |
+| `ads_vs_ad_free` | Cost of removing ads, per platform | `cheapest_with_ads_per_month`, `cheapest_ad_free_per_month`, `ad_free_premium_per_month` (negative = ad-free is cheaper) |
+| `bundle_vs_separate` | Is a telecom bundle cheaper than buying its apps separately? | `bundle_per_month` (uses `validity_days` when set: `price × 365 / 12 / days`), `separate_per_month` (cheapest plan of each included platform), `monthly_savings`, `complete_comparison` (1 only if every included platform has a price) |
+
+### Dashboard JSON: `dashboard/data/*.json` (built by `scripts/export_json.py`, committed)
+
+| File | Contents |
+|---|---|
+| `platforms.json`, `prices.json`, `subscribers.json`, `bundles.json` | One object per CSV row. `null` = unknown; booleans are `true`/`false`. |
+| `analysis.json` | `{query name: [rows]}` for every query above |
+| `meta.json` | `prices_checked`, `subscribers_checked`, `bundles_checked`: the latest `accessed_date` per file, shown on every chart |
+
+The export is deterministic (sorted keys, no timestamps). A test fails if the committed JSON is out of date. Fix it with `python scripts/export_json.py`.

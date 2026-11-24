@@ -86,9 +86,9 @@ Collect every figure with its exact metric type. Starting leads from research (f
 - [x] Add CI badge to README
 
 ### M10 — `docs/readme-and-insights`
-- [ ] README: headline insight with a number, screenshots, how it works, data sources, limitations, how to run
-- [ ] `DATA_DICTIONARY.md` complete
-- [ ] 3 resume bullets + a short LinkedIn post draft in `docs/`
+- [x] README: headline insight with a number, screenshots, how it works, data sources, limitations, how to run
+- [x] `DATA_DICTIONARY.md` complete
+- [x] 3 resume bullets + a short LinkedIn post draft in `docs/`
 
 ### M11 — `chore/deploy-pages` *(ask Sangita first)*
 - [ ] Deploy `dashboard/` to GitHub Pages; add live link to README
