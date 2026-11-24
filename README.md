@@ -1,5 +1,7 @@
 # India OTT Market Dashboard
 
+[![CI](https://github.com/SangitaZare/india-ott-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/SangitaZare/india-ott-dashboard/actions/workflows/ci.yml)
+
 An analysis of India's streaming (OTT) market: why subscriber numbers from different sources disagree, what streaming really costs in ₹, and which plan combination is best for a family.
 
 > **Status: work in progress.** See [PROJECT_PLAN.md](PROJECT_PLAN.md) for the roadmap.
@@ -47,4 +49,4 @@ Browsers block loading data from a file opened directly, so use the local server
 
 The picker can be opened pre-filled, e.g. `picker.html?lang=Tamil,Telugu&screens=2&cricket=1&ads=0&budget=400&unverified=1`.
 
-The picker's logic (`dashboard/js/picker.js`) is unit tested with Node's built-in test runner (`node --test tests/js/`); `python -m pytest` runs those tests too when Node.js is installed.
+The picker's logic (`dashboard/js/picker.js`) is unit tested with Node's built-in test runner (`node --test tests/js/*.test.js`); `python -m pytest` runs those tests too when Node.js is installed.

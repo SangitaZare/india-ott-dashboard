@@ -25,6 +25,7 @@ EXPECTED_FILES = [
     "requirements.txt",
     ".gitignore",
     ".github/pr_body.md",
+    ".github/workflows/ci.yml",
 ]
 
 
