@@ -74,19 +74,40 @@ def test_meta_has_checked_dates(fresh: Path) -> None:
 # --- Dashboard wiring ---------------------------------------------------------------------
 
 
-def test_index_html_local_files_exist() -> None:
-    html = (DASHBOARD / "index.html").read_text(encoding="utf-8")
-    local = [ref for ref in re.findall(r'(?:src|href)="([^"]+)"', html)
-             if not ref.startswith(("http", "#", "mailto:")) and ref != "index.html"]
+PAGES = sorted(DASHBOARD.glob("*.html"))
+
+
+def test_dashboard_has_pages() -> None:
+    assert {p.name for p in PAGES} >= {"index.html", "cost.html"}
+
+
+@pytest.mark.parametrize("page", PAGES, ids=lambda p: p.name)
+def test_page_local_files_exist(page: Path) -> None:
+    html = page.read_text(encoding="utf-8")
+    local = [ref for ref in re.findall(r'(?:src|href)="([^"]+)"', html) if not ref.startswith(("http", "#", "mailto:"))]
     assert local, "expected local css/js references"
     for ref in local:
         assert (DASHBOARD / ref).is_file(), ref
 
 
-def test_external_scripts_are_pinned_to_an_exact_version() -> None:
-    html = (DASHBOARD / "index.html").read_text(encoding="utf-8")
+@pytest.mark.parametrize("page", PAGES, ids=lambda p: p.name)
+def test_external_scripts_are_pinned_to_an_exact_version(page: Path) -> None:
+    html = page.read_text(encoding="utf-8")
     for url in re.findall(r'<script[^>]+src="(https?://[^"]+)"', html):
         assert re.search(r"/\d+\.\d+\.\d+/", url), f"unpinned script: {url}"
+
+
+@pytest.mark.parametrize("page", PAGES, ids=lambda p: p.name)
+def test_every_page_links_to_every_finished_page(page: Path) -> None:
+    html = page.read_text(encoding="utf-8")
+    for other in PAGES:
+        assert f'href="{other.name}"' in html, f"{page.name} has no tab for {other.name}"
+
+
+def test_bundle_notes_say_whether_data_only_or_full_plan(fresh: Path) -> None:
+    """cost.js classifies bundles by this notes prefix; every bundle must have one of the two."""
+    for bundle in load(fresh, "bundles"):
+        assert bundle["notes"].startswith(("Data pack only", "Full prepaid plan")), bundle["bundle_name"]
 
 
 def test_page_only_loads_exported_json() -> None:
