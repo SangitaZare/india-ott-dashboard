@@ -78,7 +78,7 @@ PAGES = sorted(DASHBOARD.glob("*.html"))
 
 
 def test_dashboard_has_pages() -> None:
-    assert {p.name for p in PAGES} >= {"index.html", "cost.html"}
+    assert {p.name for p in PAGES} >= {"index.html", "cost.html", "picker.html"}
 
 
 @pytest.mark.parametrize("page", PAGES, ids=lambda p: p.name)
