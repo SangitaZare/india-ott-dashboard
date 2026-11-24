@@ -14,7 +14,7 @@ A data analytics project built on a hand-compiled, fully sourced dataset of Indi
 
 The numbers are rarely wrong. They count **different things** (people vs subscriptions vs households vs viewing share), on different dates, from sources with different incentives. This project records *what each number measures* and puts them side by side.
 
-![Page 1: Why do the numbers disagree?](docs/screenshots/page1-desktop.png)
+[![Page 1: Why do the numbers disagree? Stat tiles and the range of estimates for each platform](docs/screenshots/page1-desktop.png)](https://sangitazare.github.io/india-ott-dashboard/)
 
 ## Key findings
 
@@ -36,12 +36,24 @@ A static site (HTML + vanilla JavaScript + Chart.js) with three pages, **live at
 | **Real cost of OTT** | ₹ per screen per month; yearly vs monthly; ads vs ad-free; telecom bundles vs buying separately; every plan we checked |
 | **Family plan picker** | The cheapest combination of plans for your screens, languages, live cricket, ads and budget, with why other platforms were ruled out |
 
+### Family plan picker
+
+A Hindi-speaking family that wants **live cricket on 2 screens and a TV** gets **JioHotstar Super at ₹92/month**, with every fact verified on official pages.
+The picker never treats an unknown fact as "yes". A switch includes unverified facts, which are then flagged on the result.
+
 <p>
-  <img src="docs/screenshots/page2-desktop.png" width="49%" alt="Page 2: The real cost of OTT in India">
-  <img src="docs/screenshots/page3-desktop.png" width="49%" alt="Page 3: Family plan picker">
+  <a href="https://sangitazare.github.io/india-ott-dashboard/picker.html?lang=Hindi&cricket=1"><img src="docs/screenshots/page3-desktop.png" width="72%" alt="Family plan picker on desktop: Hindi + live cricket, 2 screens, TV, ₹500 budget → JioHotstar Super, ₹92 a month"></a>
+  <img src="docs/screenshots/page3-mobile.png" width="24%" alt="The same picker result on a phone">
 </p>
 
-The picker never treats an unknown fact as "yes". By default it only counts facts verified on official pages. A switch includes unverified facts, which are then flagged on the result.
+### The real cost of OTT
+
+Every plan converted to ₹ per month; per-screen cost; yearly vs monthly; ads vs ad-free. Telecom bundles are compared **like-for-like**, against the same tier bought separately.
+
+<p>
+  <a href="https://sangitazare.github.io/india-ott-dashboard/cost.html"><img src="docs/screenshots/page2-desktop.png" width="49%" alt="Cost page: headline tiles and rupees per screen per month"></a>
+  <img src="docs/screenshots/page2-bundles.png" width="49%" alt="Cost page: what we know about telecom bundles, and the like-for-like comparison">
+</p>
 
 ## How it works
 
