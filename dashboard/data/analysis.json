@@ -194,166 +194,6 @@
  ],
  "bundle_vs_separate": [
   {
-   "bundle_name": "WATCH LIVE IND V NZ + 15 OTT",
-   "bundle_per_month": 217.26,
-   "complete_comparison": 1,
-   "monthly_savings": 207.24,
-   "platforms_included": 6,
-   "platforms_priced": 6,
-   "provider": "Jio",
-   "separate_per_month": 424.5
-  },
-  {
-   "bundle_name": "DATA ONLY PACK + 10 OTT",
-   "bundle_per_month": 190.1,
-   "complete_comparison": 1,
-   "monthly_savings": 76.23,
-   "platforms_included": 4,
-   "platforms_priced": 4,
-   "provider": "Jio",
-   "separate_per_month": 266.33
-  },
-  {
-   "bundle_name": "₹279 data pack (no name shown)",
-   "bundle_per_month": 279.0,
-   "complete_comparison": 1,
-   "monthly_savings": 69.75,
-   "platforms_included": 4,
-   "platforms_priced": 4,
-   "provider": "Airtel",
-   "separate_per_month": 348.75
-  },
-  {
-   "bundle_name": "₹100 data pack (no name shown)",
-   "bundle_per_month": 101.39,
-   "complete_comparison": 1,
-   "monthly_savings": 64.78,
-   "platforms_included": 3,
-   "platforms_priced": 3,
-   "provider": "Airtel",
-   "separate_per_month": 166.17
-  },
-  {
-   "bundle_name": "₹200 data pack (no name shown)",
-   "bundle_per_month": 217.26,
-   "complete_comparison": 1,
-   "monthly_savings": 49.07,
-   "platforms_included": 4,
-   "platforms_priced": 4,
-   "provider": "Airtel",
-   "separate_per_month": 266.33
-  },
-  {
-   "bundle_name": "JIOHOTSTAR DATA PACK",
-   "bundle_per_month": 80.1,
-   "complete_comparison": 1,
-   "monthly_savings": 11.49,
-   "platforms_included": 1,
-   "platforms_priced": 1,
-   "provider": "Jio",
-   "separate_per_month": 91.58
-  },
-  {
-   "bundle_name": "Cricket Pack",
-   "bundle_per_month": 102.4,
-   "complete_comparison": 1,
-   "monthly_savings": -10.82,
-   "platforms_included": 1,
-   "platforms_priced": 1,
-   "provider": "Vi",
-   "separate_per_month": 91.58
-  },
-  {
-   "bundle_name": "SonyLIV+19 OTTs +30GB",
-   "bundle_per_month": 217.26,
-   "complete_comparison": 1,
-   "monthly_savings": -17.51,
-   "platforms_included": 3,
-   "platforms_priced": 3,
-   "provider": "Vi",
-   "separate_per_month": 199.75
-  },
-  {
-   "bundle_name": "SonyLIV+19 OTTs on TV",
-   "bundle_per_month": 248.0,
-   "complete_comparison": 1,
-   "monthly_savings": -48.25,
-   "platforms_included": 3,
-   "platforms_priced": 3,
-   "provider": "Vi",
-   "separate_per_month": 199.75
-  },
-  {
-   "bundle_name": "MEGA CONTENT PLAN",
-   "bundle_per_month": 543.15,
-   "complete_comparison": 1,
-   "monthly_savings": -118.65,
-   "platforms_included": 6,
-   "platforms_priced": 6,
-   "provider": "Jio",
-   "separate_per_month": 424.5
-  },
-  {
-   "bundle_name": "10 OTTS INCLUDED",
-   "bundle_per_month": 483.41,
-   "complete_comparison": 1,
-   "monthly_savings": -125.49,
-   "platforms_included": 5,
-   "platforms_priced": 5,
-   "provider": "Jio",
-   "separate_per_month": 357.92
-  },
-  {
-   "bundle_name": "₹239 plan (no name shown)",
-   "bundle_per_month": 259.63,
-   "complete_comparison": 1,
-   "monthly_savings": -168.04,
-   "platforms_included": 1,
-   "platforms_priced": 1,
-   "provider": "Vi",
-   "separate_per_month": 91.58
-  },
-  {
-   "bundle_name": "AMAZON PRIME INCLUDED",
-   "bundle_per_month": 372.6,
-   "complete_comparison": 1,
-   "monthly_savings": -214.44,
-   "platforms_included": 2,
-   "platforms_priced": 2,
-   "provider": "Jio",
-   "separate_per_month": 158.17
-  },
-  {
-   "bundle_name": "NETFLIX INCLUDED",
-   "bundle_per_month": 470.37,
-   "complete_comparison": 1,
-   "monthly_savings": -229.79,
-   "platforms_included": 2,
-   "platforms_priced": 2,
-   "provider": "Jio",
-   "separate_per_month": 240.58
-  },
-  {
-   "bundle_name": "includes JioHotstar",
-   "bundle_per_month": 487.75,
-   "complete_comparison": 1,
-   "monthly_savings": -288.0,
-   "platforms_included": 3,
-   "platforms_priced": 3,
-   "provider": "Vi",
-   "separate_per_month": 199.75
-  },
-  {
-   "bundle_name": "₹1199 plan (no name shown)",
-   "bundle_per_month": 434.16,
-   "complete_comparison": 1,
-   "monthly_savings": -309.33,
-   "platforms_included": 2,
-   "platforms_priced": 2,
-   "provider": "Airtel",
-   "separate_per_month": 124.83
-  },
-  {
    "bundle_name": "includes Amazon Prime Lite",
    "bundle_per_month": 378.04,
    "complete_comparison": 1,
@@ -361,47 +201,228 @@
    "platforms_included": 1,
    "platforms_priced": 1,
    "provider": "Vi",
-   "separate_per_month": 66.58
-  },
-  {
-   "bundle_name": "₹449 plan (no name shown)",
-   "bundle_per_month": 487.75,
-   "complete_comparison": 1,
-   "monthly_savings": -321.59,
-   "platforms_included": 3,
-   "platforms_priced": 3,
-   "provider": "Airtel",
-   "separate_per_month": 166.17
-  },
-  {
-   "bundle_name": "₹1729 plan (no name shown)",
-   "bundle_per_month": 626.08,
-   "complete_comparison": 1,
-   "monthly_savings": -335.58,
-   "platforms_included": 3,
-   "platforms_priced": 3,
-   "provider": "Airtel",
-   "separate_per_month": 290.5
-  },
-  {
-   "bundle_name": "₹598 plan (no name shown)",
-   "bundle_per_month": 649.61,
-   "complete_comparison": 1,
-   "monthly_savings": -359.11,
-   "platforms_included": 3,
-   "platforms_priced": 3,
-   "provider": "Airtel",
-   "separate_per_month": 290.5
+   "separate_per_month": 66.58,
+   "unmatched_tiers": null
   },
   {
    "bundle_name": "₹1198 plan (no name shown)",
    "bundle_per_month": 520.56,
    "complete_comparison": 1,
-   "monthly_savings": -371.56,
+   "monthly_savings": -321.56,
    "platforms_included": 1,
    "platforms_priced": 1,
    "provider": "Vi",
-   "separate_per_month": 149.0
+   "separate_per_month": 199.0,
+   "unmatched_tiers": null
+  },
+  {
+   "bundle_name": "₹100 data pack (no name shown)",
+   "bundle_per_month": 101.39,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 3,
+   "platforms_priced": 0,
+   "provider": "Airtel",
+   "separate_per_month": null,
+   "unmatched_tiers": "aha unstated; sonyliv unstated; sunnxt unstated"
+  },
+  {
+   "bundle_name": "₹1199 plan (no name shown)",
+   "bundle_per_month": 434.16,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 2,
+   "platforms_priced": 1,
+   "provider": "Airtel",
+   "separate_per_month": null,
+   "unmatched_tiers": "sonyliv unstated"
+  },
+  {
+   "bundle_name": "₹1729 plan (no name shown)",
+   "bundle_per_month": 626.08,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 3,
+   "platforms_priced": 2,
+   "provider": "Airtel",
+   "separate_per_month": null,
+   "unmatched_tiers": "zee5 Premium"
+  },
+  {
+   "bundle_name": "₹200 data pack (no name shown)",
+   "bundle_per_month": 217.26,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 4,
+   "platforms_priced": 0,
+   "provider": "Airtel",
+   "separate_per_month": null,
+   "unmatched_tiers": "jiohotstar Mobile; prime_video Mobile Edition; sonyliv unstated; zee5 Premium"
+  },
+  {
+   "bundle_name": "₹279 data pack (no name shown)",
+   "bundle_per_month": 279.0,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 4,
+   "platforms_priced": 2,
+   "provider": "Airtel",
+   "separate_per_month": null,
+   "unmatched_tiers": "sonyliv unstated; zee5 Premium"
+  },
+  {
+   "bundle_name": "₹449 plan (no name shown)",
+   "bundle_per_month": 487.75,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 3,
+   "platforms_priced": 0,
+   "provider": "Airtel",
+   "separate_per_month": null,
+   "unmatched_tiers": "aha unstated; sonyliv unstated; sunnxt unstated"
+  },
+  {
+   "bundle_name": "₹598 plan (no name shown)",
+   "bundle_per_month": 649.61,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 3,
+   "platforms_priced": 2,
+   "provider": "Airtel",
+   "separate_per_month": null,
+   "unmatched_tiers": "zee5 Premium"
+  },
+  {
+   "bundle_name": "10 OTTS INCLUDED",
+   "bundle_per_month": 483.41,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 5,
+   "platforms_priced": 0,
+   "provider": "Jio",
+   "separate_per_month": null,
+   "unmatched_tiers": "hoichoi unstated; jiohotstar Mobile; sonyliv unstated; sunnxt unstated; zee5 unstated"
+  },
+  {
+   "bundle_name": "AMAZON PRIME INCLUDED",
+   "bundle_per_month": 372.6,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 2,
+   "platforms_priced": 1,
+   "provider": "Jio",
+   "separate_per_month": null,
+   "unmatched_tiers": "jiohotstar Mobile"
+  },
+  {
+   "bundle_name": "DATA ONLY PACK + 10 OTT",
+   "bundle_per_month": 190.1,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 4,
+   "platforms_priced": 0,
+   "provider": "Jio",
+   "separate_per_month": null,
+   "unmatched_tiers": "hoichoi unstated; sonyliv unstated; sunnxt unstated; zee5 unstated"
+  },
+  {
+   "bundle_name": "JIOHOTSTAR DATA PACK",
+   "bundle_per_month": 80.1,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 1,
+   "platforms_priced": 0,
+   "provider": "Jio",
+   "separate_per_month": null,
+   "unmatched_tiers": "jiohotstar Mobile"
+  },
+  {
+   "bundle_name": "MEGA CONTENT PLAN",
+   "bundle_per_month": 543.15,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 6,
+   "platforms_priced": 0,
+   "provider": "Jio",
+   "separate_per_month": null,
+   "unmatched_tiers": "hoichoi unstated; jiohotstar Mobile; prime_video Mobile Edition; sonyliv unstated; sunnxt unstated; zee5 unstated"
+  },
+  {
+   "bundle_name": "NETFLIX INCLUDED",
+   "bundle_per_month": 470.37,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 2,
+   "platforms_priced": 1,
+   "provider": "Jio",
+   "separate_per_month": null,
+   "unmatched_tiers": "jiohotstar Mobile"
+  },
+  {
+   "bundle_name": "WATCH LIVE IND V NZ + 15 OTT",
+   "bundle_per_month": 217.26,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 6,
+   "platforms_priced": 0,
+   "provider": "Jio",
+   "separate_per_month": null,
+   "unmatched_tiers": "hoichoi unstated; jiohotstar unstated; prime_video Mobile Edition; sonyliv unstated; sunnxt unstated; zee5 unstated"
+  },
+  {
+   "bundle_name": "Cricket Pack",
+   "bundle_per_month": 102.4,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 1,
+   "platforms_priced": 0,
+   "provider": "Vi",
+   "separate_per_month": null,
+   "unmatched_tiers": "jiohotstar Mobile"
+  },
+  {
+   "bundle_name": "SonyLIV+19 OTTs +30GB",
+   "bundle_per_month": 217.26,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 3,
+   "platforms_priced": 0,
+   "provider": "Vi",
+   "separate_per_month": null,
+   "unmatched_tiers": "jiohotstar unstated; sonyliv unstated; zee5 unstated"
+  },
+  {
+   "bundle_name": "SonyLIV+19 OTTs on TV",
+   "bundle_per_month": 248.0,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 3,
+   "platforms_priced": 0,
+   "provider": "Vi",
+   "separate_per_month": null,
+   "unmatched_tiers": "jiohotstar unstated; sonyliv unstated; zee5 unstated"
+  },
+  {
+   "bundle_name": "includes JioHotstar",
+   "bundle_per_month": 487.75,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 3,
+   "platforms_priced": 0,
+   "provider": "Vi",
+   "separate_per_month": null,
+   "unmatched_tiers": "jiohotstar unstated; sonyliv unstated; zee5 unstated"
+  },
+  {
+   "bundle_name": "₹239 plan (no name shown)",
+   "bundle_per_month": 259.63,
+   "complete_comparison": 0,
+   "monthly_savings": null,
+   "platforms_included": 1,
+   "platforms_priced": 0,
+   "provider": "Vi",
+   "separate_per_month": null,
+   "unmatched_tiers": "jiohotstar Mobile"
   }
  ],
  "cheapest_ad_free_4k": [
