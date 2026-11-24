@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Family plan picker · India OTT Market</title>
+  <meta name="description" content="Find the cheapest combination of Indian OTT plans that fits your family: screens, languages, live cricket, ads and budget.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">▶</span> India OTT Market</a>
+      <nav aria-label="Dashboard pages">
+        <ul class="tabs">
+          <li><a href="index.html">Why numbers disagree</a></li>
+          <li><a href="cost.html">Real cost of OTT</a></li>
+          <li><a href="picker.html" aria-current="page">Family plan picker</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero">
+      <p class="eyebrow">India · for your household</p>
+      <h1>Which plans should my family pay for?</h1>
+      <p class="lede">Tell us what your household needs. We find the <strong>cheapest combination</strong> of official plans that covers it, and say plainly when something can't be verified.</p>
+      <p class="chart-source" id="checked-note"></p>
+    </section>
+
+    <div class="picker-layout">
+      <form class="picker-form" id="picker-form" aria-labelledby="form-title">
+        <h2 id="form-title">Your household</h2>
+
+        <div class="field-row">
+          <label for="people">People at home
+            <input type="number" id="people" name="people" min="1" max="12" value="4" inputmode="numeric">
+          </label>
+          <label for="screens">Watching at the same time
+            <select id="screens" name="screens">
+              <option value="1">1 screen</option>
+              <option value="2" selected>2 screens</option>
+              <option value="3">3 screens</option>
+              <option value="4">4 screens</option>
+            </select>
+          </label>
+        </div>
+
+        <fieldset>
+          <legend>Must have content in</legend>
+          <div class="check-grid" id="languages"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Also needed</legend>
+          <label class="check"><input type="checkbox" id="cricket" name="cricket"> Live cricket</label>
+          <label class="check"><input type="checkbox" id="needs-tv" name="needsTv" checked> Watch on a TV (not mobile-only plans)</label>
+          <label class="check"><input type="checkbox" id="ads-ok" name="adsOk" checked> Ads are OK</label>
+        </fieldset>
+
+        <label for="budget">Monthly budget (₹)
+          <input type="number" id="budget" name="budget" min="0" step="50" value="500" inputmode="numeric">
+        </label>
+
+        <fieldset class="unverified-box">
+          <legend>Unverified facts</legend>
+          <label class="check"><input type="checkbox" id="allow-unverified" name="allowUnverified">
+            Also consider plans where a need isn't verified yet</label>
+          <p class="hint">Many official pages don't say how many screens can stream at once, or list their languages.
+            By default we only count facts we could verify. Turn this on to include the rest; anything unverified is flagged.</p>
+        </fieldset>
+      </form>
+
+      <section class="picker-result" aria-labelledby="result-title">
+        <h2 id="result-title">Best match</h2>
+        <div id="result" aria-live="polite"></div>
+        <div id="alternatives"></div>
+        <details class="excluded" id="excluded-box">
+          <summary>Why some platforms aren't suggested</summary>
+          <ul id="excluded"></ul>
+        </details>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p id="data-note">Loading data…</p>
+      <p>Monthly cost = plan price converted to a month (a yearly plan is paid upfront). Prices come only from official plan pages.
+        Data, methods and limitations: <a href="https://github.com/SangitaZare/india-ott-dashboard">GitHub repository</a>.</p>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/picker.js"></script>
+  <script src="js/picker-page.js"></script>
+</body>
+</html>
