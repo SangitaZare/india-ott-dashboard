@@ -186,8 +186,24 @@
 
   // --- Chart 4: bundles ------------------------------------------------------------------------
 
-  // bundles.csv notes start with "Data pack only" for data add-ons; everything else is a full prepaid plan.
-  const bundleType = (b) => (b.notes.startsWith("Data pack only") ? "data" : "full");
+  // Data-only pack or full prepaid plan (from the bundles.csv notes prefix - see js/bundles.js).
+  const bundleType = (b) => (Bundles.isDataPack(b) ? "data" : "full");
+
+  /** "What we know" - exact counts from the data (js/bundles.js, unit tested), never a general claim. */
+  function renderBundleSummary(bundles, comparisons) {
+    const s = Bundles.bundleSummary(bundles, comparisons, names);
+    const items = [
+      [`${s.withCutDownOrUnnamed} of ${s.total} bundles give at least one app as a cut-down or unnamed tier.`,
+        ` ${s.withMobileTier} include a mobile tier (${s.mobileExamples.join(", ")}); ${s.withUnnamedTier} give apps through JioTV, Airtel Xstream Play or Vi Movies & TV without naming the plan.`],
+      [`${s.comparable} of ${s.total} can be compared like-for-like${s.comparable ? `, and ${s.comparableCheaper ? `${s.comparableCheaper} of them` : "none of them"} costs less than buying the same apps` : ""}.`,
+        s.comparable ? " Their prices also cover calls and data, which you may need anyway." : ""],
+      ["If you mainly watch on a TV, check which tier each app comes in before choosing a bundle.",
+        " A mobile tier may not play on your TV; the app's own plan is the safer comparison."],
+    ];
+    document.getElementById("bundle-summary").replaceChildren(...items.map(([lead, rest]) =>
+      el("li", {}, [el("strong", { text: lead }), el("span", { text: rest })])));
+    return s;
+  }
 
   /** "jiohotstar Mobile" -> readable reason why that app can't be priced like-for-like. */
   function blockerText(code) {
@@ -202,6 +218,7 @@
     const typeOf = Object.fromEntries(bundles.map((b) => [`${b.provider}|${b.bundle_name}`, bundleType(b)]));
     const rows = analysisRows.map((r) => ({ ...r, type: typeOf[`${r.provider}|${r.bundle_name}`] }));
     const complete = rows.filter((r) => r.complete_comparison === 1);
+    const summary = renderBundleSummary(bundles, analysisRows);
 
     document.getElementById("bundle-callout").replaceChildren(
       el("strong", { text: "Read this first. " }),
@@ -286,8 +303,14 @@
     }
     document.getElementById("bundle-source").textContent =
       `Bundle prices from jio.com, airtel.in and myvi.in (Maharashtra & Goa circle), checked ${formatDate(checked)}. 28- and 84-day plans are converted at 365/12 days per month.`;
-    // Open on data-only packs (the fair comparison) - unless none of them is comparable yet.
-    const first = complete.some((r) => r.type === "data") || !complete.length ? "data" : "full";
+    // Open on data-only packs (the fair comparison) - unless none of them is comparable yet, in which
+    // case that button is disabled so the chart never looks broken.
+    const dataButton = document.querySelector('.toggle button[data-type="data"]');
+    if (summary.dataPacksComparable === 0 && complete.length) {
+      dataButton.disabled = true;
+      dataButton.textContent = "Data-only packs (none comparable yet)";
+    }
+    const first = summary.dataPacksComparable > 0 || !complete.length ? "data" : "full";
     for (const b of document.querySelectorAll(".toggle button")) b.setAttribute("aria-pressed", String(b.dataset.type === first));
     draw(first);
   }
