@@ -103,6 +103,36 @@ WHERE has_ads = 0
 ORDER BY price_per_month, platform_id;
 
 
+-- name: ads_vs_ad_free
+-- Q4b. What does removing ads cost on each platform?
+-- Cheapest plan WITH ads vs cheapest plan WITHOUT ads, per month. NULL = the platform has no such plan
+-- (or its ads are unknown). A negative premium means the ad-free plan is actually cheaper per month,
+-- usually because it is billed yearly.
+WITH per_platform AS (
+    SELECT
+        platform_id,
+        MIN(CASE WHEN has_ads = 1 THEN price_per_month END) AS with_ads,
+        MIN(CASE WHEN has_ads = 0 THEN price_per_month END) AS ad_free,
+        SUM(has_ads IS NULL)                                AS plans_with_unknown_ads
+    FROM monthly_prices
+    GROUP BY platform_id
+)
+SELECT
+    pp.platform_id,
+    (SELECT plan_name || ' (' || billing_period || ')' FROM monthly_prices m
+      WHERE m.platform_id = pp.platform_id AND m.has_ads = 1
+      ORDER BY m.price_per_month, m.plan_name LIMIT 1)          AS cheapest_with_ads_plan,
+    ROUND(pp.with_ads, 2)                                       AS cheapest_with_ads_per_month,
+    (SELECT plan_name || ' (' || billing_period || ')' FROM monthly_prices m
+      WHERE m.platform_id = pp.platform_id AND m.has_ads = 0
+      ORDER BY m.price_per_month, m.plan_name LIMIT 1)          AS cheapest_ad_free_plan,
+    ROUND(pp.ad_free, 2)                                        AS cheapest_ad_free_per_month,
+    ROUND(pp.ad_free - pp.with_ads, 2)                          AS ad_free_premium_per_month,
+    pp.plans_with_unknown_ads
+FROM per_platform AS pp
+ORDER BY pp.platform_id;
+
+
 -- name: bundle_vs_separate
 -- Q5. Is a telecom/DTH bundle cheaper than buying each included platform on its own?
 -- "Separately" = the cheapest current plan of each platform, per month (from Q2b's logic).
