@@ -47,10 +47,12 @@ def subscriber(pid: str, metric: str, value: str = "", low: str = "", high: str 
     }
 
 
-def bundle(name: str, inr: str, period: str, platforms: str, days: str = "") -> dict[str, str]:
+def bundle(name: str, inr: str, period: str, tiers: str, days: str = "") -> dict[str, str]:
+    """tiers like 'a=Basic;b=Lite' - included_platforms is derived from it."""
+    platforms = ";".join(item.split("=")[0] for item in tiers.split(";"))
     return {
         "provider": "TestTel", "bundle_name": name, "price_inr": inr, "billing_period": period, "validity_days": days,
-        "included_platforms": platforms, "source_url": "https://testtel.example.net/b", **PROV,
+        "included_platforms": platforms, "included_tiers": tiers, "source_url": "https://testtel.example.net/b", **PROV,
     }
 
 
@@ -73,9 +75,11 @@ def fixture_rows() -> dict[str, list[dict[str, str]]]:
             subscriber("a", "viewers", value="50", source="S1"),
         ],
         BUNDLES.filename: [
-            bundle("Combo", "100", "month", "a;b"),
-            bundle("Partial", "1200", "year", "a;c"),  # c has no prices
-            bundle("Day28", "280", "month", "a", days="28"),  # telecom-style 28-day validity
+            bundle("Combo", "100", "month", "a=Basic;b=Lite"),
+            bundle("Partial", "1200", "year", "a=Basic;c=Gold"),  # c has no prices
+            bundle("Day28", "280", "month", "a=Basic", days="28"),  # telecom-style 28-day validity
+            bundle("Premium", "250", "month", "a=Ultra"),  # the bundle gives a's Ultra tier, not its cheapest plan
+            bundle("Mystery", "90", "month", "a=unstated;b=Lite"),  # provider names no tier for a
         ],
     }
 
@@ -113,7 +117,7 @@ def by_plan(rows: list[sqlite3.Row]) -> dict[tuple[str, str, str], sqlite3.Row]:
 def test_build_loads_every_row(conn) -> None:
     counts = {t: conn.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0]
               for t in ("platforms", "prices", "subscribers", "bundles", "bundle_platforms")}
-    assert counts == {"platforms": 3, "prices": 7, "subscribers": 4, "bundles": 3, "bundle_platforms": 5}
+    assert counts == {"platforms": 3, "prices": 7, "subscribers": 4, "bundles": 5, "bundle_platforms": 8}
 
 
 def test_empty_cells_become_null_not_zero(conn) -> None:
@@ -259,7 +263,7 @@ def test_ads_vs_ad_free_keeps_unknowns_unknown(conn) -> None:
 def test_bundle_vs_separate(conn) -> None:
     rows = {r["bundle_name"]: r for r in query(conn, "bundle_vs_separate")}
     combo = rows["Combo"]
-    # Separately: cheapest a (80/month) + cheapest b (50/month) = 130 vs bundle 100.
+    # Separately, same tiers: a Basic (cheapest billing = yearly, 80/month) + b Lite (50/month) = 130 vs bundle 100.
     assert (combo["separate_per_month"], combo["monthly_savings"], combo["complete_comparison"]) == (130.0, 30.0, 1)
 
 
@@ -272,6 +276,27 @@ def test_day_based_bundle_uses_validity_days(conn) -> None:
 def test_bundle_with_unpriced_platform_is_flagged_incomplete(conn) -> None:
     partial = {r["bundle_name"]: r for r in query(conn, "bundle_vs_separate")}["Partial"]
     assert (partial["platforms_included"], partial["platforms_priced"], partial["complete_comparison"]) == (2, 1, 0)
+    # No half-comparisons: savings are only given when every app is priced.
+    assert partial["separate_per_month"] is None and partial["monthly_savings"] is None
+    assert partial["unmatched_tiers"] == "c Gold"
+
+
+def test_bundle_is_compared_with_the_same_tier_not_the_cheapest_plan(conn) -> None:
+    premium = {r["bundle_name"]: r for r in query(conn, "bundle_vs_separate")}["Premium"]
+    # The bundle gives a's Ultra (300/month). Comparing with a's cheapest plan (Basic, 80) would wrongly
+    # make the bundle look 170/month more expensive; like-for-like it saves 50.
+    assert (premium["separate_per_month"], premium["monthly_savings"]) == (300.0, 50.0)
+
+
+def test_bundle_with_unstated_tier_is_not_comparable(conn) -> None:
+    mystery = {r["bundle_name"]: r for r in query(conn, "bundle_vs_separate")}["Mystery"]
+    assert (mystery["platforms_priced"], mystery["complete_comparison"], mystery["monthly_savings"]) == (1, 0, None)
+    assert mystery["unmatched_tiers"] == "a unstated"
+
+
+def test_comparable_bundles_are_listed_first(conn) -> None:
+    flags = [r["complete_comparison"] for r in query(conn, "bundle_vs_separate")]
+    assert flags == sorted(flags, reverse=True)
 
 
 # --- run_analysis -----------------------------------------------------------------------------

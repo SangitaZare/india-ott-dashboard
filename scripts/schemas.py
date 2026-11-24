@@ -144,6 +144,10 @@ BUNDLES = Dataset(
         # Blank = the plan really is billed per calendar month/quarter/year.
         Column("validity_days", "int", required=False, blank_is_normal=True),
         Column("included_platforms", "list"),
+        # Which tier of each included platform the bundle gives, e.g. "jiohotstar=Mobile;netflix=Basic".
+        # The tier is the plan name as the provider shows it. Analysis compares a bundle only with the
+        # SAME tier bought separately (a plan of that name in prices.csv); "unstated" = the page names no tier.
+        Column("included_tiers", "list"),
         *PROVENANCE,
     ),
     unique_key=("provider", "bundle_name", "billing_period", "as_of_date"),

@@ -244,42 +244,50 @@ four_k[["platform", "plan_name", "billing_period", "price_inr", "price_per_month
 
     ("md", """## 4. Are telecom bundles cheaper?
 
-`bundle_vs_separate` compares each bundle's monthly cost with buying the cheapest plan of each included platform separately.
-28- and 84-day plans are converted with 365/12 days per month (you recharge 13 times a year, not 12).
-
-**Two cautions before reading the result:**
-- **Full prepaid plans also pay for calls and data**, which you'd buy anyway, so comparing their full price with OTT alone is unfair. Only **data-only packs** give a like-for-like comparison. We don't subtract a "base plan" price because we haven't collected one; that would be a guess.
-- Most bundles include **JioHotstar Mobile**, which isn't on JioHotstar's web plans page. "Separately" therefore uses its cheapest web plan (Super, ₹92/month), so savings on those bundles are an upper bound."""),
+`bundle_vs_separate` compares each bundle with buying **the same tier** of each included app separately. "JioHotstar Mobile" is compared with JioHotstar's Mobile plan, never with a different plan.
+If that tier has no official price, or the provider doesn't say which tier it gives, the bundle is **not comparable**, instead of getting a misleading saving.
+28- and 84-day plans are converted with 365/12 days per month (you recharge 13 times a year, not 12)."""),
 
     ("code", """bundles = q("bundle_vs_separate")
 notes = table("SELECT provider, bundle_name, notes FROM bundles")
 bundles = bundles.merge(notes, on=["provider", "bundle_name"])
 bundles["plan_type"] = bundles.notes.str.startswith("Data pack only").map({True: "Data-only pack", False: "Full prepaid plan"})
-complete = bundles[bundles.complete_comparison == 1].copy()
+print(f"{int(bundles.complete_comparison.sum())} of {len(bundles)} bundles can be compared like-for-like.")
+
+# What blocks the rest: each missing tier, and how many bundles it blocks.
+blockers = (bundles.loc[bundles.complete_comparison == 0, "unmatched_tiers"].str.split("; ").explode()
+            .value_counts().rename_axis("missing tier").reset_index(name="bundles blocked"))
+blockers["missing tier"] = blockers["missing tier"].str.replace(r"^(\\w+) ", lambda m: PLATFORM_NAMES[m.group(1)] + " ", regex=True)
+blockers"""),
+
+    ("code", """complete = bundles[bundles.complete_comparison == 1].copy()
 complete["label"] = complete.provider + " " + complete.bundle_name.str.replace(" (no name shown)", "", regex=False)
 complete = complete.sort_values(["plan_type", "monthly_savings"]).reset_index(drop=True)
 
-fig, ax = plt.subplots(figsize=(10.5, max(4, 0.42 * len(complete) + 1.5)))  # grows with the number of bundles
+fig, ax = plt.subplots(figsize=(10.5, max(2.6, 0.42 * len(complete) + 1.6)))  # grows with the number of bundles
 for i, row in complete.iterrows():
     ax.plot([row.separate_per_month, row.bundle_per_month], [i, i], color=GRID, linewidth=2, zorder=1)
 ax.scatter(complete.separate_per_month, complete.index, s=70, color=ORANGE, edgecolor=SURFACE, linewidth=2,
-           label="Buying the included apps separately", zorder=3)
+           label="Same tiers bought separately", zorder=3)
 ax.scatter(complete.bundle_per_month, complete.index, s=70, color=BLUE, edgecolor=SURFACE, linewidth=2,
            label="Bundle price", zorder=3)
 ax.set_yticks(complete.index, complete.label + "  [" + complete.plan_type + "]")
+ax.set_ylim(-0.6, len(complete) - 0.4)
 ax.set_xlim(0, complete[["bundle_per_month", "separate_per_month"]].max().max() * 1.12)
 ax.set_xlabel("₹ per month")
-ax.set_title(f"Bundle vs buying separately ({len(complete)} of {len(bundles)} bundles have complete prices)")
+ax.set_title(f"Bundles that can be compared like-for-like ({len(complete)} of {len(bundles)})")
 ax.legend(loc="upper left", bbox_to_anchor=(1.0, 1.0), frameon=False)
 source_note(ax, "Sources: jio.com, airtel.in, myvi.in (Maharashtra & Goa circle) and official OTT plan pages, checked 23-24 Nov 2026.")
-fig.tight_layout(rect=(0, 0.04, 1, 1))
+fig.tight_layout(rect=(0, 0.06, 1, 1))
 plt.show()
 
 complete[["label", "plan_type", "bundle_per_month", "separate_per_month", "monthly_savings"]]"""),
 
-    ("md", """For **data-only packs**, the fair comparison, bundles can be genuinely cheaper than paying for the same apps directly. Full prepaid plans look expensive here only because their price also covers calls and data.
+    ("md", """**Most bundles can't be compared like-for-like.** They give cut-down tiers that aren't sold on the platform's website, such as **JioHotstar Mobile** and **Prime Video Mobile Edition**, or apps through an aggregator (JioTV, Airtel Xstream Play, Vi Movies & TV) without naming a tier.
+The few that *can* be compared are full prepaid plans, whose price also covers calls and data, so they look expensive next to the app alone.
 
-Note the catch: bundled apps are usually the **mobile** tier (JioHotstar Mobile, Prime Video Mobile Edition), or arrive through an aggregator app instead of the platform's own."""),
+An earlier version compared every bundle with the cheapest web plan of each app. That made several data packs look ₹11–₹207/month cheaper, but those were upper bounds, not real savings.
+The single most useful next data point is the **JioHotstar Mobile** price (in the app only): it would make 5 more bundles fully comparable."""),
 
     ("md", """## 5. Key insights
 

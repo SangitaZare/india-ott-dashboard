@@ -116,6 +116,7 @@ These measure **different things**. They must never be added together or compare
 | `billing_period` | `month` / `quarter` / `year` | yes | What `price_inr` pays for. For day-based plans, pick the closest one (28 days → `month`, 84 days → `quarter`). |
 | `validity_days` | int ≥ 1 | no | Validity in days as shown by the provider (e.g. `28`, `84`). Leave blank for true calendar periods. When filled, analysis converts the price to ₹/month with `price × 365 / 12 / validity_days`, because a 28-day plan is bought 13 times a year, not 12. |
 | `included_platforms` | list | yes | `platform_id`s from `platforms.csv`, `;`-separated. Note in `notes` if the included tier is a cut-down version (e.g. mobile-only). |
+| `included_tiers` | list | yes | The tier the bundle gives for **each** included platform: `platform_id=Tier;...`, e.g. `jiohotstar=Mobile;netflix=Basic`. The tier is the plan name the provider shows. Use `unstated` when the page names no tier (e.g. apps reached through JioTV or Airtel Xstream Play). Every platform in `included_platforms` needs exactly one tier. Analysis compares the bundle only with **that** plan bought separately. |
 
 **`notes` convention for bundles:** every bundle's notes start with either `Data pack only` (a data add-on that needs
 a base plan) or `Full prepaid plan` (includes calls and data, so its price is not for OTT alone). The cost page uses this
@@ -146,7 +147,7 @@ The build validates the CSVs first and refuses invalid data. Types: numbers are 
 | Table / view | What |
 |---|---|
 | `platforms`, `prices`, `subscribers`, `bundles` | One table per CSV, same columns |
-| `bundle_platforms` | One row per (bundle, included platform): the `;` list in `bundles.included_platforms`, split so SQL can join on it |
+| `bundle_platforms` | One row per (bundle, included platform, `tier`), split from `bundles.included_tiers` so SQL can join on it |
 | `current_prices` (view) | The newest row per plan + billing period (prices keep history) |
 | `monthly_prices` (view) | `current_prices` with `months` (1 / 3 / 12) and `price_per_month` = `price_inr / months`. Plans with no price are excluded. |
 
@@ -163,7 +164,7 @@ Run them with `python scripts/run_analysis.py [name ...]`.
 | `annual_vs_monthly_savings` | Saving from paying yearly, for plans sold both ways | `twelve_months_cost`, `yearly_savings_inr`, `savings_pct` = (12 × monthly − yearly) ÷ (12 × monthly) |
 | `cheapest_ad_free_4k` | Cheapest 4K plans with no ads | `price_per_month`. Plans with unknown ads or quality are excluded. |
 | `ads_vs_ad_free` | Cost of removing ads, per platform | `cheapest_with_ads_per_month`, `cheapest_ad_free_per_month`, `ad_free_premium_per_month` (negative = ad-free is cheaper) |
-| `bundle_vs_separate` | Is a telecom bundle cheaper than buying its apps separately? | `bundle_per_month` (uses `validity_days` when set: `price × 365 / 12 / days`), `separate_per_month` (cheapest plan of each included platform), `monthly_savings`, `complete_comparison` (1 only if every included platform has a price) |
+| `bundle_vs_separate` | Is a telecom bundle cheaper than buying the **same tiers** separately? | `bundle_per_month` (uses `validity_days` when set: `price × 365 / 12 / days`), `separate_per_month` (each included app at the tier the bundle gives, cheapest billing period of that plan), `monthly_savings`, `complete_comparison` (1 only if every included tier has a price; otherwise separate and savings are `NULL`), `unmatched_tiers` (e.g. `jiohotstar Mobile; sonyliv unstated`) |
 
 ### Dashboard JSON: `dashboard/data/*.json` (built by `scripts/export_json.py`, committed)
 

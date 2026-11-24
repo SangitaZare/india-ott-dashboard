@@ -134,17 +134,14 @@ ORDER BY pp.platform_id;
 
 
 -- name: bundle_vs_separate
--- Q5. Is a telecom/DTH bundle cheaper than buying each included platform on its own?
--- "Separately" = the cheapest current plan of each platform, per month (from Q2b's logic).
+-- Q5. Is a telecom/DTH bundle cheaper than buying the SAME thing separately?
+-- Like-for-like: each included app is priced at the tier the bundle actually gives (bundles.included_tiers),
+-- e.g. JioHotstar Mobile is compared with JioHotstar's Mobile plan, never with a different plan.
+-- If that tier has no known price (or the provider names no tier: unstated), the bundle is not comparable
+-- yet: complete_comparison = 0, separate and savings are NULL, and unmatched_tiers says which app is missing.
 -- Day-based bundles (validity_days, e.g. 28) are converted with 365/12 = 30.42 days per month,
--- so a ₹449 / 28-day plan costs ₹487.79 per month, not ₹449.
--- Caveat: a bundle often includes a cut-down tier (see bundles.notes), so this is a best case for buying separately.
-WITH cheapest AS (
-    SELECT platform_id, MIN(price_per_month) AS cheapest_per_month
-    FROM monthly_prices
-    GROUP BY platform_id
-),
-bundle_monthly AS (
+-- so a 449 rupee / 28-day plan costs 487.79 per month, not 449.
+WITH bundle_monthly AS (
     SELECT
         b.provider,
         b.bundle_name,
@@ -157,23 +154,41 @@ bundle_monthly AS (
         END AS bundle_per_month
     FROM bundles AS b
     WHERE b.price_inr IS NOT NULL
+),
+tier_prices AS (
+    SELECT
+        bp.*,
+        (SELECT MIN(mp.price_per_month) FROM monthly_prices AS mp
+          WHERE mp.platform_id = bp.platform_id AND mp.plan_name = bp.tier) AS tier_per_month
+    FROM bundle_platforms AS bp
+),
+per_bundle AS (
+    SELECT
+        bm.provider,
+        bm.bundle_name,
+        bm.bundle_per_month,
+        COUNT(tp.platform_id)                                       AS platforms_included,
+        COUNT(tp.tier_per_month)                                    AS platforms_priced,
+        SUM(tp.tier_per_month)                                      AS matched_total,
+        GROUP_CONCAT(CASE WHEN tp.tier_per_month IS NULL THEN tp.platform_id || ' ' || tp.tier END, '; ')
+                                                                    AS unmatched_tiers
+    FROM bundle_monthly AS bm
+    JOIN tier_prices AS tp
+      ON tp.provider = bm.provider
+     AND tp.bundle_name = bm.bundle_name
+     AND tp.billing_period = bm.billing_period
+     AND tp.as_of_date = bm.as_of_date
+    GROUP BY bm.provider, bm.bundle_name, bm.billing_period, bm.as_of_date
 )
 SELECT
-    bm.provider,
-    bm.bundle_name,
-    ROUND(bm.bundle_per_month, 2)                                   AS bundle_per_month,
-    COUNT(bp.platform_id)                                           AS platforms_included,
-    COUNT(c.platform_id)                                            AS platforms_priced,
-    ROUND(SUM(c.cheapest_per_month), 2)                             AS separate_per_month,
-    ROUND(SUM(c.cheapest_per_month) - bm.bundle_per_month, 2)       AS monthly_savings,
-    -- Only a fair comparison when every included platform has a known price.
-    CASE WHEN COUNT(c.platform_id) = COUNT(bp.platform_id) THEN 1 ELSE 0 END AS complete_comparison
-FROM bundle_monthly AS bm
-JOIN bundle_platforms AS bp
-  ON bp.provider = bm.provider
- AND bp.bundle_name = bm.bundle_name
- AND bp.billing_period = bm.billing_period
- AND bp.as_of_date = bm.as_of_date
-LEFT JOIN cheapest AS c ON c.platform_id = bp.platform_id
-GROUP BY bm.provider, bm.bundle_name, bm.billing_period, bm.as_of_date
-ORDER BY monthly_savings DESC;
+    provider,
+    bundle_name,
+    ROUND(bundle_per_month, 2)                                      AS bundle_per_month,
+    platforms_included,
+    platforms_priced,
+    CASE WHEN platforms_priced = platforms_included THEN 1 ELSE 0 END AS complete_comparison,
+    CASE WHEN platforms_priced = platforms_included THEN ROUND(matched_total, 2) END AS separate_per_month,
+    CASE WHEN platforms_priced = platforms_included THEN ROUND(matched_total - bundle_per_month, 2) END AS monthly_savings,
+    unmatched_tiers
+FROM per_bundle
+ORDER BY complete_comparison DESC, monthly_savings DESC, provider, bundle_name;

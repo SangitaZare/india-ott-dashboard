@@ -77,6 +77,7 @@ def valid_rows() -> dict[str, list[dict[str, str]]]:
                 "price_inr": "299",
                 "billing_period": "month",
                 "included_platforms": "streamx",
+                "included_tiers": "streamx=Basic",
                 "source_url": "https://testtel.example.net/combo",
                 **PROVENANCE,
             }
@@ -296,6 +297,20 @@ def test_unknown_platform_in_prices(tmp_path: Path) -> None:
 def test_market_total_allowed_only_in_subscribers(tmp_path: Path) -> None:
     assert run_with_change(tmp_path, SUBSCRIBERS.filename, platform_id="market_total").ok
     assert_error(run_with_change(tmp_path, PRICES.filename, platform_id="market_total"), "not in platforms.csv")
+
+
+@pytest.mark.parametrize("bad", ["streamx", "streamx=", "=Basic", "streamx=Basic;streamx=Premium"])
+def test_malformed_included_tiers(tmp_path: Path, bad: str) -> None:
+    assert_error(run_with_change(tmp_path, BUNDLES.filename, included_tiers=bad), "included_tiers must look like")
+
+
+def test_included_tiers_must_cover_every_included_platform(tmp_path: Path) -> None:
+    report = run_with_change(tmp_path, BUNDLES.filename, included_tiers="otherflix=Basic")
+    assert_error(report, "exactly one tier for every platform")
+
+
+def test_included_tiers_is_required(tmp_path: Path) -> None:
+    assert_error(run_with_change(tmp_path, BUNDLES.filename, included_tiers=""), "'included_tiers' is required")
 
 
 def test_unknown_platform_in_bundle(tmp_path: Path) -> None:

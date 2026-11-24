@@ -18,7 +18,7 @@ from datetime import date
 from pathlib import Path
 
 from schemas import ALL_DATASETS, BUNDLES, Column, Dataset
-from validate_data import LIST_SEPARATOR, load_csv, validate
+from validate_data import load_csv, parse_tiers, validate
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DATA_DIR = REPO_ROOT / "data"
@@ -67,18 +67,17 @@ def load_dataset(conn: sqlite3.Connection, dataset: Dataset, data_dir: Path) -> 
 
 
 def load_bundle_platforms(conn: sqlite3.Connection, bundle_rows: list[dict[str, str]]) -> None:
-    """Split the ';' list in bundles.included_platforms into one row per platform, so SQL can join on it."""
+    """One row per (bundle, included platform, tier), split from bundles.included_tiers, so SQL can join on it."""
     conn.execute(
         "CREATE TABLE bundle_platforms (provider TEXT, bundle_name TEXT, billing_period TEXT,"
-        " as_of_date TEXT, platform_id TEXT)"
+        " as_of_date TEXT, platform_id TEXT, tier TEXT)"
     )
     links = [
-        (row["provider"], row["bundle_name"], row["billing_period"], row["as_of_date"], item.strip())
+        (row["provider"], row["bundle_name"], row["billing_period"], row["as_of_date"], platform, tier)
         for row in bundle_rows
-        for item in row["included_platforms"].split(LIST_SEPARATOR)
-        if item.strip()
+        for platform, tier in (parse_tiers(row["included_tiers"]) or {}).items()
     ]
-    conn.executemany("INSERT INTO bundle_platforms VALUES (?, ?, ?, ?, ?)", links)
+    conn.executemany("INSERT INTO bundle_platforms VALUES (?, ?, ?, ?, ?, ?)", links)
 
 
 def build(data_dir: Path, db_path: Path, today: date | None = None) -> Path:
