@@ -40,3 +40,5 @@ python -m http.server 8000 -d dashboard     # then open http://localhost:8000
 Browsers block loading data from a file opened directly, so use the local server above.
 
 ![Page 1: Why do the numbers disagree?](docs/screenshots/page1-desktop.png)
+
+![Page 2: The real cost of OTT in India](docs/screenshots/page2-desktop.png)
