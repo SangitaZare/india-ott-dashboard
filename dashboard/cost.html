@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Real cost of OTT · India OTT Market</title>
+  <meta name="description" content="What streaming really costs in India: rupees per screen, yearly vs monthly, ads vs ad-free, and telecom bundles vs buying separately.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">▶</span> India OTT Market</a>
+      <nav aria-label="Dashboard pages">
+        <ul class="tabs">
+          <li><a href="index.html">Why numbers disagree</a></li>
+          <li><a href="cost.html" aria-current="page">Real cost of OTT</a></li>
+          <li><span class="tab-soon" aria-disabled="true" title="Coming soon">Family plan picker</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero">
+      <p class="eyebrow">India · streaming prices</p>
+      <h1>What does OTT really cost in ₹?</h1>
+      <p class="lede">
+        The advertised "starting price" is rarely what a family pays. We converted every official plan price
+        to <strong>rupees per month</strong> so monthly, quarterly and yearly plans can be compared fairly.
+      </p>
+      <p class="chart-source" id="checked-note"></p>
+    </section>
+
+    <section aria-labelledby="headline-title" class="block">
+      <h2 id="headline-title" class="visually-hidden">Headline numbers</h2>
+      <div class="stat-grid" id="cost-stats" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="screen-title" class="block">
+      <h2 id="screen-title">Rupees per screen per month</h2>
+      <p class="section-intro">Monthly price divided by how many screens can stream <em>at the same time</em>. The cheaper per person, the better for a family.</p>
+      <article class="chart-card">
+        <div class="chart-box" id="screen-chart-box"><canvas id="screen-chart"></canvas></div>
+        <p class="chart-note" id="screen-note"></p>
+        <p class="chart-source" data-checked></p>
+      </article>
+    </section>
+
+    <section aria-labelledby="yearly-title" class="block">
+      <h2 id="yearly-title">Paying yearly vs monthly</h2>
+      <p class="section-intro">For plans sold both ways: the cost of 12 monthly payments against one yearly payment.</p>
+      <article class="chart-card">
+        <ul class="legend" id="yearly-legend"></ul>
+        <div class="chart-box" id="yearly-chart-box"><canvas id="yearly-chart"></canvas></div>
+        <p class="chart-source" data-checked></p>
+      </article>
+    </section>
+
+    <section aria-labelledby="ads-title" class="block">
+      <h2 id="ads-title">Ads vs ad-free</h2>
+      <p class="section-intro">The cheapest plan with ads against the cheapest plan without ads, per month. Gaps mean the platform has no such plan, or its page doesn't say.</p>
+      <article class="chart-card">
+        <ul class="legend" id="ads-legend"></ul>
+        <div class="chart-box" id="ads-chart-box"><canvas id="ads-chart"></canvas></div>
+        <p class="chart-note" id="ads-note"></p>
+        <p class="chart-source" data-checked></p>
+      </article>
+    </section>
+
+    <section aria-labelledby="bundle-title" class="block">
+      <h2 id="bundle-title">Telecom bundles vs buying separately</h2>
+      <p class="callout" id="bundle-callout"></p>
+      <div class="toggle" role="group" aria-label="Which bundles to show">
+        <button type="button" data-type="data" aria-pressed="true">Data-only packs (fair comparison)</button>
+        <button type="button" data-type="full" aria-pressed="false">Full prepaid plans</button>
+      </div>
+      <article class="chart-card">
+        <ul class="legend" id="bundle-legend"></ul>
+        <div class="chart-box" id="bundle-chart-box"><canvas id="bundle-chart"></canvas></div>
+        <p class="chart-note" id="bundle-note"></p>
+        <p class="chart-source" id="bundle-source"></p>
+      </article>
+    </section>
+
+    <section aria-labelledby="plans-title" class="block">
+      <h2 id="plans-title">Every plan we checked</h2>
+      <p class="section-intro">"unknown" means the official page didn't say. We never guess.</p>
+      <div class="filters" role="group" aria-label="Filter the plan table">
+        <label>Platform <select id="filter-platform"><option value="">All</option></select></label>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="plans-title">
+        <table class="sources plans">
+          <thead>
+            <tr>
+              <th scope="col">Platform</th>
+              <th scope="col">Plan</th>
+              <th scope="col" class="num">Price</th>
+              <th scope="col">Billed</th>
+              <th scope="col" class="num">Per month</th>
+              <th scope="col" class="num">Screens</th>
+              <th scope="col">Quality</th>
+              <th scope="col">Ads</th>
+              <th scope="col">Devices</th>
+              <th scope="col">Checked</th>
+            </tr>
+          </thead>
+          <tbody id="plans-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p id="data-note">Loading data…</p>
+      <p>Prices come only from official plan pages and change often. Data, methods and limitations:
+        <a href="https://github.com/SangitaZare/india-ott-dashboard">GitHub repository</a>.</p>
+    </div>
+  </footer>
+
+  <!-- Chart.js pinned to an exact version so the dashboard never changes underneath us. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/common.js"></script>
+  <script src="js/cost.js"></script>
+</body>
+</html>

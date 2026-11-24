@@ -45,5 +45,47 @@ const OTT = (() => {
     return Number(value).toLocaleString("en-IN", { maximumFractionDigits: digits });
   }
 
-  return { loadJson, cssVar, el, formatDate, formatMonth, formatNumber };
+  function formatRupees(value) {
+    return value == null ? "unknown" : `₹${Number(value).toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
+  }
+
+  /** Shared Chart.js look: recessive grid, muted axes, dark tooltip. */
+  function chartTheme() {
+    return {
+      text: cssVar("--text-primary"),
+      text2: cssVar("--text-secondary"),
+      grid: cssVar("--border"),
+      surface: cssVar("--surface-1"),
+      tooltip: {
+        backgroundColor: cssVar("--surface-2"),
+        borderColor: cssVar("--border"),
+        borderWidth: 1,
+        titleColor: cssVar("--text-primary"),
+        bodyColor: cssVar("--text-secondary"),
+        padding: 10,
+      },
+    };
+  }
+
+  /** Split a chart label into lines of about maxChars, so long labels aren't cut off on phones. */
+  function wrapLabel(text, maxChars) {
+    if (text.length <= maxChars) return text;
+    const lines = [];
+    let line = "";
+    for (const word of text.split(" ")) {
+      if (line && (line + " " + word).length > maxChars) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = line ? `${line} ${word}` : word;
+      }
+    }
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  /** Label width that fits the screen: narrow phones get short, wrapped lines. */
+  const labelChars = () => (window.innerWidth < 600 ? 16 : 44);
+
+  return { loadJson, cssVar, el, formatDate, formatMonth, formatNumber, formatRupees, chartTheme, wrapLabel, labelChars };
 })();
