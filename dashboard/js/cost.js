@@ -176,7 +176,9 @@
     const unknown = rows.filter((r) => r.cheapest_with_ads_per_month == null && r.cheapest_ad_free_per_month == null).map((r) => names[r.platform_id]);
     const parts = [];
     for (const r of cheaperAdFree) parts.push(`On ${names[r.platform_id]}, going ad-free is ${formatRupees(-r.ad_free_premium_per_month)}/month cheaper, because the ad-free plan is billed yearly.`);
-    if (adsOnly.length) parts.push(`No ad-free plan found: ${adsOnly.join(", ")} (Prime Video sells ad-free as an add-on at an unstated price).`);
+    const primeNote = list.some((r) => r.platform_id === "prime_video" && r.cheapest_ad_free_per_month == null)
+      ? " (Prime Video sells ad-free as an add-on at a price its page doesn't state)" : "";
+    if (adsOnly.length) parts.push(`No ad-free plan found: ${adsOnly.join(", ")}${primeNote}.`);
     if (adFreeOnly.length) parts.push(`Ad-free only: ${adFreeOnly.join(", ")}.`);
     if (unknown.length) parts.push(`Ads not stated on the plan page: ${unknown.join(", ")}.`);
     document.getElementById("ads-note").textContent = parts.join(" ");
