@@ -236,6 +236,23 @@ def test_cheapest_ad_free_4k_order_and_exclusions(conn) -> None:
     ]  # b/Lite is 4K but its ads are unknown, so it is left out rather than assumed ad-free
 
 
+def test_ads_vs_ad_free(conn) -> None:
+    rows = {r["platform_id"]: r for r in query(conn, "ads_vs_ad_free")}
+    a = rows["a"]
+    # Cheapest with ads: Basic yearly = 960 / 12 = 80; cheapest ad-free: Ultra = 300 -> ad-free costs 220 more.
+    assert (a["cheapest_with_ads_plan"], a["cheapest_with_ads_per_month"]) == ("Basic (year)", 80.0)
+    assert (a["cheapest_ad_free_plan"], a["cheapest_ad_free_per_month"]) == ("Ultra (month)", 300.0)
+    assert a["ad_free_premium_per_month"] == 220.0
+
+
+def test_ads_vs_ad_free_keeps_unknowns_unknown(conn) -> None:
+    b = {r["platform_id"]: r for r in query(conn, "ads_vs_ad_free")}["b"]
+    # b has no plan known to show ads (Lite's ads are unknown), so there is nothing to compare.
+    assert b["cheapest_with_ads_per_month"] is None and b["ad_free_premium_per_month"] is None
+    assert b["cheapest_ad_free_per_month"] == 100.0
+    assert b["plans_with_unknown_ads"] == 1
+
+
 # --- Q5 bundle vs separate -------------------------------------------------------------------
 
 
@@ -267,6 +284,7 @@ def test_analysis_file_has_every_planned_query() -> None:
         "cheapest_plan_per_platform",
         "annual_vs_monthly_savings",
         "cheapest_ad_free_4k",
+        "ads_vs_ad_free",
         "bundle_vs_separate",
     }
 

@@ -75,7 +75,7 @@ Collect every figure with its exact metric type. Starting leads from research (f
 - [x] **Page 1 – "Why do the numbers disagree?"**: range bars per platform, coloured by metric_type; source table with date + credibility; plain-English explainer of each metric type
 
 ### M7 — `feature/dashboard-cost`
-- [ ] **Page 2 – "The real cost of OTT in India"**: ₹ per screen, monthly vs yearly savings, ads vs ad-free, bundles vs separate; "prices checked on <date>" on every chart
+- [x] **Page 2 – "The real cost of OTT in India"**: ₹ per screen, monthly vs yearly savings, ads vs ad-free, bundles vs separate; "prices checked on <date>" on every chart
 
 ### M8 — `feature/family-plan-picker`
 - [ ] **Page 3 – "Best plan for your family"**: inputs → household size, simultaneous screens, languages, live cricket yes/no, ads OK yes/no, monthly budget → cheapest combination meeting all constraints, with a one-line reason

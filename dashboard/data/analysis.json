@@ -1,4 +1,69 @@
 {
+ "ads_vs_ad_free": [
+  {
+   "ad_free_premium_per_month": 25.25,
+   "cheapest_ad_free_per_month": 58.25,
+   "cheapest_ad_free_plan": "Annual Premium (year)",
+   "cheapest_with_ads_per_month": 33.0,
+   "cheapest_with_ads_plan": "Quarterly Mobile (quarter)",
+   "plans_with_unknown_ads": 0,
+   "platform_id": "aha"
+  },
+  {
+   "ad_free_premium_per_month": null,
+   "cheapest_ad_free_per_month": null,
+   "cheapest_ad_free_plan": null,
+   "cheapest_with_ads_per_month": null,
+   "cheapest_with_ads_plan": null,
+   "plans_with_unknown_ads": 2,
+   "platform_id": "hoichoi"
+  },
+  {
+   "ad_free_premium_per_month": null,
+   "cheapest_ad_free_per_month": 149.0,
+   "cheapest_ad_free_plan": "Mobile (month)",
+   "cheapest_with_ads_per_month": null,
+   "cheapest_with_ads_plan": null,
+   "plans_with_unknown_ads": 0,
+   "platform_id": "netflix"
+  },
+  {
+   "ad_free_premium_per_month": null,
+   "cheapest_ad_free_per_month": null,
+   "cheapest_ad_free_plan": null,
+   "cheapest_with_ads_per_month": 66.58,
+   "cheapest_with_ads_plan": "Prime Lite (year)",
+   "plans_with_unknown_ads": 1,
+   "platform_id": "prime_video"
+  },
+  {
+   "ad_free_premium_per_month": null,
+   "cheapest_ad_free_per_month": null,
+   "cheapest_ad_free_plan": null,
+   "cheapest_with_ads_per_month": 58.25,
+   "cheapest_with_ads_plan": "Mobile Only (year)",
+   "plans_with_unknown_ads": 0,
+   "platform_id": "sonyliv"
+  },
+  {
+   "ad_free_premium_per_month": -58.08,
+   "cheapest_ad_free_per_month": 74.92,
+   "cheapest_ad_free_plan": "Annual Premium (year)",
+   "cheapest_with_ads_per_month": 133.0,
+   "cheapest_with_ads_plan": "Quarterly lite (quarter)",
+   "plans_with_unknown_ads": 0,
+   "platform_id": "sunnxt"
+  },
+  {
+   "ad_free_premium_per_month": null,
+   "cheapest_ad_free_per_month": null,
+   "cheapest_ad_free_plan": null,
+   "cheapest_with_ads_per_month": 49.92,
+   "cheapest_with_ads_plan": "Bengali Movies, Series, TV Shows, Live TV (year)",
+   "plans_with_unknown_ads": 0,
+   "platform_id": "zee5"
+  }
+ ],
  "annual_vs_monthly_savings": [
   {
    "monthly_price": 399.0,
