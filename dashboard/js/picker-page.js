@@ -21,7 +21,7 @@
     const budget = $("budget").value === "" ? null : Number($("budget").value);
     return {
       people: Math.max(1, Number($("people").value) || 1),
-      screens: Number($("screens").value),
+      screens: Number($("screens").value) || 1,  // an invalid ?screens= value leaves the select empty
       languages: [...document.querySelectorAll("#languages input:checked")].map((i) => i.value),
       cricket: $("cricket").checked,
       needsTv: $("needs-tv").checked,
