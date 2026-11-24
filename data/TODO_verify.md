@@ -8,18 +8,18 @@ Any value we could not confirm from an acceptable source goes here instead of be
 
 | Platform | What we tried (2026-11-23) | What's needed |
 |---|---|---|
-| JioHotstar | Claude in Chrome: jiohotstar.com/subscribe showed an error page or timed out. Claude chat: hotstar.com/in/subscribe redirected to home without login. | Open the plans page in a normal browser (log in if needed), record every plan × period. Also confirm the official domain: jiohotstar.com or hotstar.com, and update `official_plans_url`. |
+| JioHotstar | Claude in Chrome (23 and 24 Nov): jiohotstar.com/subscribe redirects to **hotstar.com/subscribe** (domain now confirmed, `official_plans_url` updated), but the page shows an error to automation. Claude chat: redirected to home without login. | Sangita opens https://www.hotstar.com/subscribe in a normal browser (logged in if needed) and records every plan × period, or shares screenshots. **Highest priority:** blocks the Hindi + cricket picker result and 15 of 21 bundle comparisons. |
 | Planet Marathi | planetmarathi.com shows only a contact card. An undated offer page (about.planetmarathi.com/special-discount/) mentions ₹299 for the first year only - a promotion, not a price list. | Find a current official plans page (the app may be the only place). |
 
 ## platforms.csv
 
 | Platform | Missing value | Why | What's needed |
 |---|---|---|---|
-| netflix | model, languages, has_live_cricket, has_free_tier, launch_year | 2016 release does not name India; other facts not found on official pages | Netflix India launch release; official page for languages / free content |
-| prime_video | model, languages, has_live_cricket, has_free_tier | Only a 2016 "at launch" language list; cricket rights claim was unofficial | Current Prime Video India page for languages; official sports page |
-| jiohotstar | model, languages, has_live_cricket | Language source gives "12+" not a list; cricket source was a press-release index, not a specific release | Specific JioStar release for cricket rights; current language list |
-| sonyliv | owner, model, languages, has_free_tier, launch_year | Only unofficial sources (Culver Max Entertainment, 2013) | Sony Pictures Networks India / Culver Max official page |
-| zee5 | languages, has_live_cricket | Only a 2018 language count | Current ZEE5 about page |
+| netflix | model, has_live_cricket, has_free_tier, launch_year | Languages filled 24 Nov from the Netflix newsroom. No official statement on live cricket; the 2016 release does not name India | Netflix India launch release; official statement on sports / free content |
+| prime_video | model, has_live_cricket, has_free_tier | Languages filled 24 Nov (About Amazon India, Mar 2026). NZ cricket rights ran only to the 2025-26 season; no renewal found | Official Amazon statement on current live cricket rights |
+| jiohotstar | model | Languages and live cricket filled 24 Nov from JioStar releases. Languages are the IPL language feeds named by JioStar, a lower bound (the platform says "over 19") | Full official language list; plan prices (above) to set model |
+| sonyliv | owner, model, languages, has_free_tier, launch_year | Only unofficial sources (Culver Max Entertainment, 2013). Sony LIV's Oct 2023 Business Wire release (languages) returned 403 on 24 Nov | Sony Pictures Networks India / Culver Max official page or press release |
+| zee5 | languages, has_live_cricket | Only a 2018 language count; the Jul 2026 seven-language slate was found only in news coverage (24 Nov) | Official ZEE5 / Zee Entertainment release |
 | aha | owner, has_live_cricket, launch_year | Owner source was a movie page; launch year only unofficial (March 2020) | Aha About / Terms page naming the company |
 | hoichoi | model, has_live_cricket, has_free_tier | Not found | Hoichoi FAQ / about page |
 | sunnxt | has_live_cricket | Not found | Sun NXT official sports page |
