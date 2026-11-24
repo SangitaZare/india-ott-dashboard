@@ -82,8 +82,8 @@ Collect every figure with its exact metric type. Starting leads from research (f
 - [x] Picker logic unit-tested (edge cases: no valid combo, budget too low)
 
 ### M9 — `ci/github-actions`
-- [ ] `.github/workflows/ci.yml`: install deps, run `validate_data.py` + `pytest` on every PR
-- [ ] Add CI badge to README
+- [x] `.github/workflows/ci.yml`: install deps, run `validate_data.py` + `pytest` on every PR
+- [x] Add CI badge to README
 
 ### M10 — `docs/readme-and-insights`
 - [ ] README: headline insight with a number, screenshots, how it works, data sources, limitations, how to run

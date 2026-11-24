@@ -1,5 +1,7 @@
 # India OTT Market Dashboard
 
+[![CI](https://github.com/SangitaZare/india-ott-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/SangitaZare/india-ott-dashboard/actions/workflows/ci.yml)
+
 An analysis of India's streaming (OTT) market: why subscriber numbers from different sources disagree, what streaming really costs in ₹, and which plan combination is best for a family.
 
 > **Status: work in progress.** See [PROJECT_PLAN.md](PROJECT_PLAN.md) for the roadmap.
