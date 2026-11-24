@@ -70,9 +70,9 @@ Collect every figure with its exact metric type. Starting leads from research (f
 - [x] Key insights section in plain business language (5 bullets max)
 
 ### M6 — `feature/dashboard-reconciliation`
-- [ ] `scripts/export_json.py`
-- [ ] Static dashboard shell (dark streaming-style theme, responsive)
-- [ ] **Page 1 – "Why do the numbers disagree?"**: range bars per platform, coloured by metric_type; source table with date + credibility; plain-English explainer of each metric type
+- [x] `scripts/export_json.py`
+- [x] Static dashboard shell (dark streaming-style theme, responsive)
+- [x] **Page 1 – "Why do the numbers disagree?"**: range bars per platform, coloured by metric_type; source table with date + credibility; plain-English explainer of each metric type
 
 ### M7 — `feature/dashboard-cost`
 - [ ] **Page 2 – "The real cost of OTT in India"**: ₹ per screen, monthly vs yearly savings, ads vs ad-free, bundles vs separate; "prices checked on <date>" on every chart
