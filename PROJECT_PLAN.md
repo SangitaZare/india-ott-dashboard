@@ -78,8 +78,8 @@ Collect every figure with its exact metric type. Starting leads from research (f
 - [x] **Page 2 – "The real cost of OTT in India"**: ₹ per screen, monthly vs yearly savings, ads vs ad-free, bundles vs separate; "prices checked on <date>" on every chart
 
 ### M8 — `feature/family-plan-picker`
-- [ ] **Page 3 – "Best plan for your family"**: inputs → household size, simultaneous screens, languages, live cricket yes/no, ads OK yes/no, monthly budget → cheapest combination meeting all constraints, with a one-line reason
-- [ ] Picker logic unit-tested (edge cases: no valid combo, budget too low)
+- [x] **Page 3 – "Best plan for your family"**: inputs → household size, simultaneous screens, languages, live cricket yes/no, ads OK yes/no, monthly budget → cheapest combination meeting all constraints, with a one-line reason
+- [x] Picker logic unit-tested (edge cases: no valid combo, budget too low)
 
 ### M9 — `ci/github-actions`
 - [ ] `.github/workflows/ci.yml`: install deps, run `validate_data.py` + `pytest` on every PR

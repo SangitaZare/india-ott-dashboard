@@ -42,3 +42,9 @@ Browsers block loading data from a file opened directly, so use the local server
 ![Page 1: Why do the numbers disagree?](docs/screenshots/page1-desktop.png)
 
 ![Page 2: The real cost of OTT in India](docs/screenshots/page2-desktop.png)
+
+![Page 3: Family plan picker](docs/screenshots/page3-desktop.png)
+
+The picker can be opened pre-filled, e.g. `picker.html?lang=Tamil,Telugu&screens=2&cricket=1&ads=0&budget=400&unverified=1`.
+
+The picker's logic (`dashboard/js/picker.js`) is unit tested with Node's built-in test runner (`node --test tests/js/`); `python -m pytest` runs those tests too when Node.js is installed.
