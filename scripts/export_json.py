@@ -54,6 +54,7 @@ def export(data_dir: Path, out_dir: Path) -> list[Path]:
             }
             payloads["meta"] = {
                 "prices_checked": conn.execute("SELECT MAX(accessed_date) FROM prices").fetchone()[0],
+                "prices_first_checked": conn.execute("SELECT MIN(accessed_date) FROM prices").fetchone()[0],
                 "subscribers_checked": conn.execute("SELECT MAX(accessed_date) FROM subscribers").fetchone()[0],
                 "bundles_checked": conn.execute("SELECT MAX(accessed_date) FROM bundles").fetchone()[0],
             }

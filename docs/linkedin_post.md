@@ -19,7 +19,7 @@ It gets stranger for a single platform. JioHotstar's "paying subscribers" range 
 So I built a data project around it:
 📊 A dataset of 48 OTT plans, 21 telecom bundles and 19 subscriber figures, every value linked to its source
 🔍 A dashboard that shows why the numbers disagree
-💰 A cost model in ₹ per month: paying yearly saves 58–69%
+💰 A cost model in ₹ per month: paying yearly saves 38–69%
 👨‍👩‍👧 A family plan picker that finds the cheapest combination for your screens, languages and budget
 
 The biggest lesson: a good analysis says "unknown" when the data doesn't know.

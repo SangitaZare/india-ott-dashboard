@@ -3,7 +3,7 @@
 "use strict";
 
 (() => {
-  const { loadJson, el, formatDate, formatRupees } = OTT;
+  const { loadJson, el, formatDateRange, formatRupees } = OTT;
 
   const PERIOD = { month: "month", quarter: "3 months", year: "year" };
   const QUALITY = { SD: "SD", HD: "HD", FHD: "Full HD", "4K": "4K" };
@@ -169,7 +169,7 @@
       const languages = [...new Set(platforms.flatMap((p) => (p.languages ? p.languages.split(";") : [])))].sort();
       $("languages").replaceChildren(...languages.map((lang) =>
         el("label", { className: "check" }, [el("input", { attrs: { type: "checkbox", value: lang, name: "languages" } }), document.createTextNode(` ${lang}`)])));
-      $("checked-note").textContent = `Prices from official plan pages, checked ${formatDate(meta.prices_checked)}.`;
+      $("checked-note").textContent = `Prices from official plan pages, checked ${formatDateRange(meta.prices_first_checked, meta.prices_checked)}.`;
       const unpriced = platforms.filter((p) => !analysis.price_per_screen.some((r) => r.platform_id === p.platform_id)).map((p) => p.name);
       note.textContent = `${analysis.price_per_screen.length} plans from ${platforms.length - unpriced.length} platforms.`
         + (unpriced.length ? ` Not included yet (no verified price): ${unpriced.join(", ")}.` : "")

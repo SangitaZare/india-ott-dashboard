@@ -4,7 +4,7 @@
 "use strict";
 
 (() => {
-  const { loadJson, cssVar, el, formatDate, formatNumber, formatRupees, chartTheme, wrapLabel, labelChars } = OTT;
+  const { loadJson, cssVar, el, formatDate, formatDateRange, formatNumber, formatRupees, chartTheme, wrapLabel, labelChars } = OTT;
 
   const PERIOD = { month: "monthly", quarter: "quarterly", year: "yearly" };
   const QUALITY = { SD: "SD (480p)", HD: "HD (720p)", FHD: "Full HD (1080p)", "4K": "4K" };
@@ -198,7 +198,9 @@
     const callout = document.getElementById("bundle-callout");
     callout.replaceChildren(
       el("strong", { text: "Read this first. " }),
-      el("span", { text: `Full prepaid plans also pay for calls and data you'd buy anyway, so only data-only packs are a like-for-like comparison. ${incomplete} of ${rows.length} bundles include a platform without a verified price (mostly JioHotstar), so they are not shown yet.` }),
+      el("span", { text: "Full prepaid plans also pay for calls and data you'd buy anyway, so only data-only packs are a like-for-like comparison. "
+        + "Bundled apps are often a cut-down tier (e.g. JioHotstar Mobile), while \"separately\" uses each platform's cheapest web plan, so savings are an upper bound."
+        + (incomplete ? ` ${incomplete} of ${rows.length} bundles include a platform without a verified price, so they are not shown yet.` : "") }),
     );
 
     const bundleColor = cssVar("--series-1");
@@ -300,7 +302,7 @@
         ["analysis", "prices", "bundles", "platforms", "meta"].map(loadJson));
       names = Object.fromEntries(platforms.map((p) => [p.platform_id, p.name]));
       const theme = chartTheme();
-      const checkedText = `Prices from official plan pages, checked ${formatDate(meta.prices_checked)}.`;
+      const checkedText = `Prices from official plan pages, checked ${formatDateRange(meta.prices_first_checked, meta.prices_checked)}.`;
       document.getElementById("checked-note").textContent = checkedText;
       for (const node of document.querySelectorAll("[data-checked]")) node.textContent = checkedText;
 
@@ -311,7 +313,7 @@
       renderBundles(analysis.bundle_vs_separate, bundles, theme, meta.bundles_checked);
       renderTable(prices, analysis.price_per_screen);
       const missing = platforms.filter((p) => !prices.some((r) => r.platform_id === p.platform_id)).map((p) => p.name);
-      note.textContent = `${prices.length} plans from ${new Set(prices.map((p) => p.platform_id)).size} platforms and ${bundles.length} telecom bundles, checked ${formatDate(meta.prices_checked)}.`
+      note.textContent = `${prices.length} plans from ${new Set(prices.map((p) => p.platform_id)).size} platforms and ${bundles.length} telecom bundles, checked ${formatDateRange(meta.prices_first_checked, meta.prices_checked)}.`
         + (missing.length ? ` No verified prices yet for ${missing.join(" and ")}.` : "");
     } catch (error) {
       note.textContent = `Could not load the data: ${error.message}. If you opened this file directly, serve the folder instead: python -m http.server -d dashboard`;

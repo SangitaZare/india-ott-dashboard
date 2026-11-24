@@ -19,6 +19,15 @@
    "platform_id": "hoichoi"
   },
   {
+   "ad_free_premium_per_month": 91.67,
+   "cheapest_ad_free_per_month": 183.25,
+   "cheapest_ad_free_plan": "Premium (year)",
+   "cheapest_with_ads_per_month": 91.58,
+   "cheapest_with_ads_plan": "Super (year)",
+   "plans_with_unknown_ads": 0,
+   "platform_id": "jiohotstar"
+  },
+  {
    "ad_free_premium_per_month": null,
    "cheapest_ad_free_per_month": 149.0,
    "cheapest_ad_free_plan": "Mobile (month)",
@@ -163,18 +172,36 @@
    "twelve_months_cost": 3588.0,
    "yearly_price": 1499.0,
    "yearly_savings_inr": 2089.0
+  },
+  {
+   "monthly_price": 299.0,
+   "plan_name": "Premium",
+   "platform_id": "jiohotstar",
+   "savings_pct": 38.7,
+   "twelve_months_cost": 3588.0,
+   "yearly_price": 2199.0,
+   "yearly_savings_inr": 1389.0
+  },
+  {
+   "monthly_price": 149.0,
+   "plan_name": "Super",
+   "platform_id": "jiohotstar",
+   "savings_pct": 38.5,
+   "twelve_months_cost": 1788.0,
+   "yearly_price": 1099.0,
+   "yearly_savings_inr": 689.0
   }
  ],
  "bundle_vs_separate": [
   {
    "bundle_name": "WATCH LIVE IND V NZ + 15 OTT",
    "bundle_per_month": 217.26,
-   "complete_comparison": 0,
-   "monthly_savings": 115.65,
+   "complete_comparison": 1,
+   "monthly_savings": 207.24,
    "platforms_included": 6,
-   "platforms_priced": 5,
+   "platforms_priced": 6,
    "provider": "Jio",
-   "separate_per_month": 332.92
+   "separate_per_month": 424.5
   },
   {
    "bundle_name": "DATA ONLY PACK + 10 OTT",
@@ -187,6 +214,16 @@
    "separate_per_month": 266.33
   },
   {
+   "bundle_name": "₹279 data pack (no name shown)",
+   "bundle_per_month": 279.0,
+   "complete_comparison": 1,
+   "monthly_savings": 69.75,
+   "platforms_included": 4,
+   "platforms_priced": 4,
+   "provider": "Airtel",
+   "separate_per_month": 348.75
+  },
+  {
    "bundle_name": "₹100 data pack (no name shown)",
    "bundle_per_month": 101.39,
    "complete_comparison": 1,
@@ -197,74 +234,114 @@
    "separate_per_month": 166.17
   },
   {
-   "bundle_name": "₹279 data pack (no name shown)",
-   "bundle_per_month": 279.0,
-   "complete_comparison": 0,
-   "monthly_savings": -21.83,
-   "platforms_included": 4,
-   "platforms_priced": 3,
-   "provider": "Airtel",
-   "separate_per_month": 257.17
-  },
-  {
    "bundle_name": "₹200 data pack (no name shown)",
    "bundle_per_month": 217.26,
-   "complete_comparison": 0,
-   "monthly_savings": -42.51,
+   "complete_comparison": 1,
+   "monthly_savings": 49.07,
    "platforms_included": 4,
-   "platforms_priced": 3,
+   "platforms_priced": 4,
    "provider": "Airtel",
-   "separate_per_month": 174.75
+   "separate_per_month": 266.33
+  },
+  {
+   "bundle_name": "JIOHOTSTAR DATA PACK",
+   "bundle_per_month": 80.1,
+   "complete_comparison": 1,
+   "monthly_savings": 11.49,
+   "platforms_included": 1,
+   "platforms_priced": 1,
+   "provider": "Jio",
+   "separate_per_month": 91.58
+  },
+  {
+   "bundle_name": "Cricket Pack",
+   "bundle_per_month": 102.4,
+   "complete_comparison": 1,
+   "monthly_savings": -10.82,
+   "platforms_included": 1,
+   "platforms_priced": 1,
+   "provider": "Vi",
+   "separate_per_month": 91.58
   },
   {
    "bundle_name": "SonyLIV+19 OTTs +30GB",
    "bundle_per_month": 217.26,
-   "complete_comparison": 0,
-   "monthly_savings": -109.1,
+   "complete_comparison": 1,
+   "monthly_savings": -17.51,
    "platforms_included": 3,
-   "platforms_priced": 2,
+   "platforms_priced": 3,
    "provider": "Vi",
-   "separate_per_month": 108.17
+   "separate_per_month": 199.75
   },
   {
    "bundle_name": "SonyLIV+19 OTTs on TV",
    "bundle_per_month": 248.0,
-   "complete_comparison": 0,
-   "monthly_savings": -139.83,
+   "complete_comparison": 1,
+   "monthly_savings": -48.25,
    "platforms_included": 3,
-   "platforms_priced": 2,
+   "platforms_priced": 3,
    "provider": "Vi",
-   "separate_per_month": 108.17
+   "separate_per_month": 199.75
   },
   {
    "bundle_name": "MEGA CONTENT PLAN",
    "bundle_per_month": 543.15,
-   "complete_comparison": 0,
-   "monthly_savings": -210.24,
+   "complete_comparison": 1,
+   "monthly_savings": -118.65,
    "platforms_included": 6,
-   "platforms_priced": 5,
+   "platforms_priced": 6,
    "provider": "Jio",
-   "separate_per_month": 332.92
+   "separate_per_month": 424.5
   },
   {
    "bundle_name": "10 OTTS INCLUDED",
    "bundle_per_month": 483.41,
-   "complete_comparison": 0,
-   "monthly_savings": -217.07,
+   "complete_comparison": 1,
+   "monthly_savings": -125.49,
    "platforms_included": 5,
-   "platforms_priced": 4,
+   "platforms_priced": 5,
    "provider": "Jio",
-   "separate_per_month": 266.33
+   "separate_per_month": 357.92
+  },
+  {
+   "bundle_name": "₹239 plan (no name shown)",
+   "bundle_per_month": 259.63,
+   "complete_comparison": 1,
+   "monthly_savings": -168.04,
+   "platforms_included": 1,
+   "platforms_priced": 1,
+   "provider": "Vi",
+   "separate_per_month": 91.58
   },
   {
    "bundle_name": "AMAZON PRIME INCLUDED",
    "bundle_per_month": 372.6,
-   "complete_comparison": 0,
-   "monthly_savings": -306.02,
+   "complete_comparison": 1,
+   "monthly_savings": -214.44,
    "platforms_included": 2,
-   "platforms_priced": 1,
+   "platforms_priced": 2,
    "provider": "Jio",
-   "separate_per_month": 66.58
+   "separate_per_month": 158.17
+  },
+  {
+   "bundle_name": "NETFLIX INCLUDED",
+   "bundle_per_month": 470.37,
+   "complete_comparison": 1,
+   "monthly_savings": -229.79,
+   "platforms_included": 2,
+   "platforms_priced": 2,
+   "provider": "Jio",
+   "separate_per_month": 240.58
+  },
+  {
+   "bundle_name": "includes JioHotstar",
+   "bundle_per_month": 487.75,
+   "complete_comparison": 1,
+   "monthly_savings": -288.0,
+   "platforms_included": 3,
+   "platforms_priced": 3,
+   "provider": "Vi",
+   "separate_per_month": 199.75
   },
   {
    "bundle_name": "₹1199 plan (no name shown)",
@@ -287,16 +364,6 @@
    "separate_per_month": 66.58
   },
   {
-   "bundle_name": "NETFLIX INCLUDED",
-   "bundle_per_month": 470.37,
-   "complete_comparison": 0,
-   "monthly_savings": -321.37,
-   "platforms_included": 2,
-   "platforms_priced": 1,
-   "provider": "Jio",
-   "separate_per_month": 149.0
-  },
-  {
    "bundle_name": "₹449 plan (no name shown)",
    "bundle_per_month": 487.75,
    "complete_comparison": 1,
@@ -307,6 +374,26 @@
    "separate_per_month": 166.17
   },
   {
+   "bundle_name": "₹1729 plan (no name shown)",
+   "bundle_per_month": 626.08,
+   "complete_comparison": 1,
+   "monthly_savings": -335.58,
+   "platforms_included": 3,
+   "platforms_priced": 3,
+   "provider": "Airtel",
+   "separate_per_month": 290.5
+  },
+  {
+   "bundle_name": "₹598 plan (no name shown)",
+   "bundle_per_month": 649.61,
+   "complete_comparison": 1,
+   "monthly_savings": -359.11,
+   "platforms_included": 3,
+   "platforms_priced": 3,
+   "provider": "Airtel",
+   "separate_per_month": 290.5
+  },
+  {
    "bundle_name": "₹1198 plan (no name shown)",
    "bundle_per_month": 520.56,
    "complete_comparison": 1,
@@ -315,66 +402,6 @@
    "platforms_priced": 1,
    "provider": "Vi",
    "separate_per_month": 149.0
-  },
-  {
-   "bundle_name": "includes JioHotstar",
-   "bundle_per_month": 487.75,
-   "complete_comparison": 0,
-   "monthly_savings": -379.59,
-   "platforms_included": 3,
-   "platforms_priced": 2,
-   "provider": "Vi",
-   "separate_per_month": 108.17
-  },
-  {
-   "bundle_name": "₹1729 plan (no name shown)",
-   "bundle_per_month": 626.08,
-   "complete_comparison": 0,
-   "monthly_savings": -427.16,
-   "platforms_included": 3,
-   "platforms_priced": 2,
-   "provider": "Airtel",
-   "separate_per_month": 198.92
-  },
-  {
-   "bundle_name": "₹598 plan (no name shown)",
-   "bundle_per_month": 649.61,
-   "complete_comparison": 0,
-   "monthly_savings": -450.7,
-   "platforms_included": 3,
-   "platforms_priced": 2,
-   "provider": "Airtel",
-   "separate_per_month": 198.92
-  },
-  {
-   "bundle_name": "JIOHOTSTAR DATA PACK",
-   "bundle_per_month": 80.1,
-   "complete_comparison": 0,
-   "monthly_savings": null,
-   "platforms_included": 1,
-   "platforms_priced": 0,
-   "provider": "Jio",
-   "separate_per_month": null
-  },
-  {
-   "bundle_name": "Cricket Pack",
-   "bundle_per_month": 102.4,
-   "complete_comparison": 0,
-   "monthly_savings": null,
-   "platforms_included": 1,
-   "platforms_priced": 0,
-   "provider": "Vi",
-   "separate_per_month": null
-  },
-  {
-   "bundle_name": "₹239 plan (no name shown)",
-   "bundle_per_month": 259.63,
-   "complete_comparison": 0,
-   "monthly_savings": null,
-   "platforms_included": 1,
-   "platforms_priced": 0,
-   "provider": "Vi",
-   "separate_per_month": null
   }
  ],
  "cheapest_ad_free_4k": [
@@ -397,6 +424,36 @@
    "platform_id": "sunnxt",
    "price_inr": 1499.0,
    "price_per_month": 124.92
+  },
+  {
+   "as_of_date": "2026-11-24",
+   "billing_period": "year",
+   "devices": "all",
+   "max_screens": 4,
+   "plan_name": "Premium",
+   "platform_id": "jiohotstar",
+   "price_inr": 2199.0,
+   "price_per_month": 183.25
+  },
+  {
+   "as_of_date": "2026-11-24",
+   "billing_period": "quarter",
+   "devices": "all",
+   "max_screens": 4,
+   "plan_name": "Premium",
+   "platform_id": "jiohotstar",
+   "price_inr": 699.0,
+   "price_per_month": 233.0
+  },
+  {
+   "as_of_date": "2026-11-24",
+   "billing_period": "month",
+   "devices": "all",
+   "max_screens": 4,
+   "plan_name": "Premium",
+   "platform_id": "jiohotstar",
+   "price_inr": 299.0,
+   "price_per_month": 299.0
   },
   {
    "as_of_date": "2026-11-23",
@@ -532,6 +589,17 @@
    "price_per_month": 83.25
   },
   {
+   "as_of_date": "2026-11-24",
+   "billing_period": "year",
+   "devices": "all",
+   "has_ads": 1,
+   "max_screens": 2,
+   "plan_name": "Super",
+   "platform_id": "jiohotstar",
+   "price_inr": 1099.0,
+   "price_per_month": 91.58
+  },
+  {
    "as_of_date": "2026-11-23",
    "billing_period": "month",
    "devices": "mobile_only",
@@ -584,6 +652,58 @@
    "price_per_screen_per_month": 41.63
   },
   {
+   "as_of_date": "2026-11-24",
+   "billing_period": "year",
+   "devices": "all",
+   "has_ads": 1,
+   "max_quality": "FHD",
+   "max_screens": 2,
+   "plan_name": "Super",
+   "platform_id": "jiohotstar",
+   "price_inr": 1099.0,
+   "price_per_month": 91.58,
+   "price_per_screen_per_month": 45.79
+  },
+  {
+   "as_of_date": "2026-11-24",
+   "billing_period": "year",
+   "devices": "all",
+   "has_ads": 0,
+   "max_quality": "4K",
+   "max_screens": 4,
+   "plan_name": "Premium",
+   "platform_id": "jiohotstar",
+   "price_inr": 2199.0,
+   "price_per_month": 183.25,
+   "price_per_screen_per_month": 45.81
+  },
+  {
+   "as_of_date": "2026-11-24",
+   "billing_period": "quarter",
+   "devices": "all",
+   "has_ads": 1,
+   "max_quality": "FHD",
+   "max_screens": 2,
+   "plan_name": "Super",
+   "platform_id": "jiohotstar",
+   "price_inr": 349.0,
+   "price_per_month": 116.33,
+   "price_per_screen_per_month": 58.17
+  },
+  {
+   "as_of_date": "2026-11-24",
+   "billing_period": "quarter",
+   "devices": "all",
+   "has_ads": 0,
+   "max_quality": "4K",
+   "max_screens": 4,
+   "plan_name": "Premium",
+   "platform_id": "jiohotstar",
+   "price_inr": 699.0,
+   "price_per_month": 233.0,
+   "price_per_screen_per_month": 58.25
+  },
+  {
    "as_of_date": "2026-11-23",
    "billing_period": "year",
    "devices": "mobile_only",
@@ -608,6 +728,32 @@
    "price_inr": 1499.0,
    "price_per_month": 124.92,
    "price_per_screen_per_month": 62.46
+  },
+  {
+   "as_of_date": "2026-11-24",
+   "billing_period": "month",
+   "devices": "all",
+   "has_ads": 1,
+   "max_quality": "FHD",
+   "max_screens": 2,
+   "plan_name": "Super",
+   "platform_id": "jiohotstar",
+   "price_inr": 149.0,
+   "price_per_month": 149.0,
+   "price_per_screen_per_month": 74.5
+  },
+  {
+   "as_of_date": "2026-11-24",
+   "billing_period": "month",
+   "devices": "all",
+   "has_ads": 0,
+   "max_quality": "4K",
+   "max_screens": 4,
+   "plan_name": "Premium",
+   "platform_id": "jiohotstar",
+   "price_inr": 299.0,
+   "price_per_month": 299.0,
+   "price_per_screen_per_month": 74.75
   },
   {
    "as_of_date": "2026-11-23",

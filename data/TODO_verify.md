@@ -4,11 +4,11 @@ Any value we could not confirm from an acceptable source goes here instead of be
 (CLAUDE.md §2, rule 4). In the CSV, the value is left empty until it is verified.
 `python scripts/validate_data.py` shows one warning per empty cell; this file groups them.
 
-## Missing platforms (no rows in prices.csv)
+## Missing platforms and plans (no rows in prices.csv)
 
 | Platform | What we tried (2026-11-23) | What's needed |
 |---|---|---|
-| JioHotstar | Claude in Chrome (23 and 24 Nov): jiohotstar.com/subscribe redirects to **hotstar.com/subscribe** (domain now confirmed, `official_plans_url` updated), but the page shows an error to automation. Claude chat: redirected to home without login. | Sangita opens https://www.hotstar.com/subscribe in a normal browser (logged in if needed) and records every plan × period, or shares screenshots. **Highest priority:** blocks the Hindi + cricket picker result and 15 of 21 bundle comparisons. |
+| JioHotstar Mobile plan | Prices for Super and Premium were added 24 Nov from hotstar.com/in/paywall. The Mobile plan is not shown on the web paywall; JioStar's 21 Jan 2026 press release lists it at ₹79 / ₹149 / ₹499 (month / quarter / year, '1 mobile device at a time'), but prices must come from a plan page | An official JioHotstar page listing the Mobile plan (e.g. in the app or help centre). Bundles include JioHotstar *Mobile*, so `bundle_vs_separate` currently compares them with Super, the cheapest web plan |
 | Planet Marathi | planetmarathi.com shows only a contact card. An undated offer page (about.planetmarathi.com/special-discount/) mentions ₹299 for the first year only - a promotion, not a price list. | Find a current official plans page (the app may be the only place). |
 
 ## platforms.csv
@@ -17,7 +17,7 @@ Any value we could not confirm from an acceptable source goes here instead of be
 |---|---|---|---|
 | netflix | model, has_live_cricket, has_free_tier, launch_year | Languages filled 24 Nov from the Netflix newsroom. No official statement on live cricket; the 2016 release does not name India | Netflix India launch release; official statement on sports / free content |
 | prime_video | model, has_live_cricket, has_free_tier | Languages filled 24 Nov (About Amazon India, Mar 2026). NZ cricket rights ran only to the 2025-26 season; no renewal found | Official Amazon statement on current live cricket rights |
-| jiohotstar | model | Languages and live cricket filled 24 Nov from JioStar releases. Languages are the IPL language feeds named by JioStar, a lower bound (the platform says "over 19") | Full official language list; plan prices (above) to set model |
+| jiohotstar | (none blank) | Languages and live cricket filled 24 Nov from JioStar releases. Languages are the IPL language feeds named by JioStar, a lower bound (the platform says "over 19") | Full official language list |
 | sonyliv | owner, model, languages, has_free_tier, launch_year | Only unofficial sources (Culver Max Entertainment, 2013). Sony LIV's Oct 2023 Business Wire release (languages) returned 403 on 24 Nov | Sony Pictures Networks India / Culver Max official page or press release |
 | zee5 | languages, has_live_cricket | Only a 2018 language count; the Jul 2026 seven-language slate was found only in news coverage (24 Nov) | Official ZEE5 / Zee Entertainment release |
 | aha | owner, has_live_cricket, launch_year | Owner source was a movie page; launch year only unofficial (March 2020) | Aha About / Terms page naming the company |
@@ -59,7 +59,7 @@ Not entered (see `data/raw/subscribers/collected_2026-11-23.md`): HSBC "24% of O
 | Airtel Xstream Play bundles (₹100, ₹200, ₹279, ₹449, ₹1199) | Page says "18+ OTTs such as …", so only the named apps are in `included_platforms` | Full Xstream Play Premium app list from airtel.in |
 | Airtel ₹598 / ₹1729 "Xstream Play Premium" | Apps not named in that row | Same as above |
 | All Airtel and Vi rows | Prices are for the Maharashtra & Goa circle | Check whether other circles differ |
-| 18 of 21 bundles include JioHotstar | No JioHotstar prices yet, so `bundle_vs_separate` marks them incomplete | JioHotstar prices (see above) |
+| 18 of 21 bundles include JioHotstar | JioHotstar prices added 24 Nov. Bundles give the *Mobile* tier, but the separate price used is Super (cheapest web plan), so savings look bigger than they are | JioHotstar Mobile plan price (see above) |
 
 ## Hand-check still to do
 

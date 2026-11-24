@@ -25,7 +25,7 @@ This notebook answers three questions using data compiled from official plan pag
 2. **What does OTT really cost in ₹?** (per screen, monthly vs yearly, ad-free 4K)
 3. **Are telecom bundles cheaper than buying platforms separately?**
 
-**Data:** every row in `data/*.csv` carries its source URL and the date it was checked. Prices were checked on **23 Nov 2026**.
+**Data:** every row in `data/*.csv` carries its source URL and the date it was checked. Prices were checked on **23–24 Nov 2026**.
 Values that could not be verified are left blank (unknown), never guessed - see `data/TODO_verify.md`.
 
 All calculations run the named queries in `sql/analysis.sql`, the same ones the dashboard uses and the unit tests check."""),
@@ -230,7 +230,7 @@ ax.bar_label(bars, labels=[f"{p:.0f}%  (₹{s:,.0f}/yr)" for p, s in zip(savings
 ax.set_title("How much paying yearly saves vs 12 monthly payments")
 ax.set_xlabel("Saving (%)")
 ax.set_xlim(0, 100)
-source_note(ax, "Source: official plan pages, checked 2026-11-23. Only plans sold both monthly and yearly.")
+source_note(ax, "Source: official plan pages, checked 23-24 Nov 2026. Only plans sold both monthly and yearly.")
 fig.tight_layout(rect=(0, 0.04, 1, 1))
 plt.show()"""),
 
@@ -249,7 +249,7 @@ four_k[["platform", "plan_name", "billing_period", "price_inr", "price_per_month
 
 **Two cautions before reading the result:**
 - **Full prepaid plans also pay for calls and data**, which you'd buy anyway, so comparing their full price with OTT alone is unfair. Only **data-only packs** give a like-for-like comparison. We don't subtract a "base plan" price because we haven't collected one; that would be a guess.
-- Most bundles include **JioHotstar**, which has no verified price yet, so those comparisons are incomplete and left out below."""),
+- Most bundles include **JioHotstar Mobile**, which isn't on JioHotstar's web plans page. "Separately" therefore uses its cheapest web plan (Super, ₹92/month), so savings on those bundles are an upper bound."""),
 
     ("code", """bundles = q("bundle_vs_separate")
 notes = table("SELECT provider, bundle_name, notes FROM bundles")
@@ -259,7 +259,7 @@ complete = bundles[bundles.complete_comparison == 1].copy()
 complete["label"] = complete.provider + " " + complete.bundle_name.str.replace(" (no name shown)", "", regex=False)
 complete = complete.sort_values(["plan_type", "monthly_savings"]).reset_index(drop=True)
 
-fig, ax = plt.subplots(figsize=(10.5, 4))
+fig, ax = plt.subplots(figsize=(10.5, max(4, 0.42 * len(complete) + 1.5)))  # grows with the number of bundles
 for i, row in complete.iterrows():
     ax.plot([row.separate_per_month, row.bundle_per_month], [i, i], color=GRID, linewidth=2, zorder=1)
 ax.scatter(complete.separate_per_month, complete.index, s=70, color=ORANGE, edgecolor=SURFACE, linewidth=2,
@@ -271,7 +271,7 @@ ax.set_xlim(0, complete[["bundle_per_month", "separate_per_month"]].max().max() 
 ax.set_xlabel("₹ per month")
 ax.set_title(f"Bundle vs buying separately ({len(complete)} of {len(bundles)} bundles have complete prices)")
 ax.legend(loc="upper left", bbox_to_anchor=(1.0, 1.0), frameon=False)
-source_note(ax, "Sources: jio.com, airtel.in, myvi.in (Maharashtra & Goa circle) and official OTT plan pages, checked 2026-11-23.")
+source_note(ax, "Sources: jio.com, airtel.in, myvi.in (Maharashtra & Goa circle) and official OTT plan pages, checked 23-24 Nov 2026.")
 fig.tight_layout(rect=(0, 0.04, 1, 1))
 plt.show()
 
@@ -286,9 +286,9 @@ Note the catch: bundled apps are usually the **mobile** tier (JioHotstar Mobile,
 INSIGHTS_PLACEHOLDER
 
 ## Limitations
-- Prices were checked on one day (23 Nov 2026) and change often; telecom prices are for one circle (Maharashtra & Goa).
+- Prices were checked on 23–24 Nov 2026 and change often; telecom prices are for one circle (Maharashtra & Goa).
 - Some rows were collected through Claude chat browsing and are not yet hand-checked (each row's `notes` says so).
-- JioHotstar and Planet Marathi prices, and Tata Play Binge plans, are missing (`data/TODO_verify.md`).
+- Planet Marathi prices, JioHotstar's Mobile plan and Tata Play Binge plans are missing (`data/TODO_verify.md`).
 - Several subscriber figures come from second-hand reports (HSBC via an entertainment site; Netflix via a podcast)."""),
 ]
 

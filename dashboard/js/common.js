@@ -41,6 +41,14 @@ const OTT = (() => {
     return `${MONTHS[m - 1]} ${y}`;
   }
 
+  /** ("2026-11-23", "2026-11-24") -> "23–24 Nov 2026"; same day -> "23 Nov 2026". */
+  function formatDateRange(first, last) {
+    if (!first || first === last) return formatDate(last);
+    const [a, b] = [formatDate(first).split(" "), formatDate(last).split(" ")];
+    if (a[1] === b[1] && a[2] === b[2]) return `${a[0]}–${b[0]} ${b[1]} ${b[2]}`;
+    return `${formatDate(first)} – ${formatDate(last)}`;
+  }
+
   function formatNumber(value, digits = 1) {
     return Number(value).toLocaleString("en-IN", { maximumFractionDigits: digits });
   }
@@ -87,5 +95,5 @@ const OTT = (() => {
   /** Label width that fits the screen: narrow phones get short, wrapped lines. */
   const labelChars = () => (window.innerWidth < 600 ? 16 : 44);
 
-  return { loadJson, cssVar, el, formatDate, formatMonth, formatNumber, formatRupees, chartTheme, wrapLabel, labelChars };
+  return { loadJson, cssVar, el, formatDate, formatDateRange, formatMonth, formatNumber, formatRupees, chartTheme, wrapLabel, labelChars };
 })();

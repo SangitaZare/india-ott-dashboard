@@ -171,6 +171,6 @@ Run them with `python scripts/run_analysis.py [name ...]`.
 |---|---|
 | `platforms.json`, `prices.json`, `subscribers.json`, `bundles.json` | One object per CSV row. `null` = unknown; booleans are `true`/`false`. |
 | `analysis.json` | `{query name: [rows]}` for every query above |
-| `meta.json` | `prices_checked`, `subscribers_checked`, `bundles_checked`: the latest `accessed_date` per file, shown on every chart |
+| `meta.json` | `prices_checked`, `subscribers_checked`, `bundles_checked`: the latest `accessed_date` per file; `prices_first_checked`: the earliest price check. Pages show the range (e.g. "checked 23–24 Nov 2026") on every chart |
 
 The export is deterministic (sorted keys, no timestamps). A test fails if the committed JSON is out of date. Fix it with `python scripts/export_json.py`.
