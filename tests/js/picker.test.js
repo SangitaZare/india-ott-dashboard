@@ -5,7 +5,7 @@
 
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { pickPlans, checkPlan, platformOffers } = require("../../dashboard/js/picker.js");
+const { pickPlans, checkPlan, platformOffers, initialLanguages } = require("../../dashboard/js/picker.js");
 
 const PLATFORMS = [
   { platform_id: "cric", name: "CricTV", languages: "Hindi;English", has_live_cricket: true },
@@ -177,4 +177,28 @@ test("totals are rounded to paise", () => {
   const odd = [plan("cric", "Yearly", 1499 / 12)];
   const r = pickPlans(odd, PLATFORMS, prefs());
   assert.equal(r.best.total, 124.92);
+});
+
+// --- Default language on first load ----------------------------------------------------------
+
+const AVAILABLE = ["Bengali", "Hindi", "Tamil", "Telugu"];
+
+test("Hindi is pre-ticked on first load", () => {
+  assert.deepEqual(initialLanguages(AVAILABLE, null), ["Hindi"]);
+});
+
+test("no default when the data has no Hindi", () => {
+  assert.deepEqual(initialLanguages(["Tamil", "Telugu"], null), []);
+});
+
+test("a ?lang= in the address replaces the default", () => {
+  assert.deepEqual(initialLanguages(AVAILABLE, "Tamil,Telugu"), ["Tamil", "Telugu"]);
+});
+
+test("an empty ?lang= means no language, so the user can turn Hindi off in a shared link", () => {
+  assert.deepEqual(initialLanguages(AVAILABLE, ""), []);
+});
+
+test("unknown languages in the address are ignored", () => {
+  assert.deepEqual(initialLanguages(AVAILABLE, "Klingon,Hindi"), ["Hindi"]);
 });
