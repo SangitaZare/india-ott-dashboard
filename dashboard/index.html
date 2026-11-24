@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why OTT numbers disagree · India OTT Market</title>
+  <meta name="description" content="Why India's OTT subscriber numbers disagree: every published figure, what it actually counts, and who said it.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">▶</span> India OTT Market</a>
+      <nav aria-label="Dashboard pages">
+        <ul class="tabs">
+          <li><a href="index.html" aria-current="page">Why numbers disagree</a></li>
+          <li><span class="tab-soon" aria-disabled="true" title="Coming soon">Real cost of OTT</span></li>
+          <li><span class="tab-soon" aria-disabled="true" title="Coming soon">Family plan picker</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero">
+      <p class="eyebrow">India · streaming subscribers</p>
+      <h1>Why do India's OTT subscriber numbers disagree?</h1>
+      <p class="lede">
+        Headlines say JioHotstar has 300 million subscribers, or 180 million, or 500 million users.
+        They're usually not wrong. They're <strong>counting different things</strong>.
+        Here is every figure we found, what it actually measures, and who said it.
+      </p>
+    </section>
+
+    <section aria-labelledby="market-title" class="block">
+      <h2 id="market-title">One market, four different numbers</h2>
+      <p class="section-intro">The same Indian OTT market, measured four ways. None of these contradicts the others.</p>
+      <div class="stat-grid" id="market-stats" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="ranges-title" class="block">
+      <h2 id="ranges-title">Same platform, different numbers</h2>
+      <p class="section-intro">
+        Each bar spans the lowest to highest estimate <em>of one kind of number</em>; dots are individual estimates.
+        Hover or tap a dot to see who said it. Colours show what is being counted, so only compare bars of the same colour.
+      </p>
+      <ul class="legend" id="metric-legend" aria-label="What each colour counts"></ul>
+      <div class="chart-grid" id="range-charts"></div>
+    </section>
+
+    <section aria-labelledby="glossary-title" class="block">
+      <h2 id="glossary-title">What each number actually counts</h2>
+      <div class="card-grid" id="glossary"></div>
+    </section>
+
+    <section aria-labelledby="sources-title" class="block">
+      <h2 id="sources-title">Every figure, with its source</h2>
+      <p class="section-intro">Credibility runs from company statements and research firms down to second-hand reports. "+" means the source said "over".</p>
+      <div class="filters" role="group" aria-label="Filter the source table">
+        <label>Platform <select id="filter-platform"><option value="">All</option></select></label>
+        <label>Counts <select id="filter-metric"><option value="">All</option></select></label>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="sources-title">
+        <table class="sources">
+          <thead>
+            <tr>
+              <th scope="col">Platform</th>
+              <th scope="col" class="num">Figure</th>
+              <th scope="col">What it counts</th>
+              <th scope="col">Source</th>
+              <th scope="col">Credibility</th>
+              <th scope="col">Figure date</th>
+              <th scope="col">Checked</th>
+            </tr>
+          </thead>
+          <tbody id="sources-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p id="data-note">Loading data…</p>
+      <p>Every number links to its source. Unverified values are left blank, never guessed.
+        Data, methods and limitations: <a href="https://github.com/SangitaZare/india-ott-dashboard">GitHub repository</a>.</p>
+    </div>
+  </footer>
+
+  <!-- Chart.js pinned to an exact version so the dashboard never changes underneath us. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/common.js"></script>
+  <script src="js/reconciliation.js"></script>
+</body>
+</html>
