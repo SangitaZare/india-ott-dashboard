@@ -9,5 +9,5 @@
 ## If an interviewer asks
 
 - **"What was the hardest part?"** Data trust, not code. Many official pages don't state screens, devices or languages. I left those values blank, tracked them in a to-verify list, and designed the analysis and the picker to treat unknown as unknown, never as zero or yes.
-- **"What would you do next?"** Find JioHotstar's Mobile plan on an official plan page (most telecom bundles include that tier, so bundle savings are currently an upper bound), re-check prices monthly to build a price history, and rebuild the picker in Angular + ASP.NET Core.
+- **"What would you do next?"** Get JioHotstar's Mobile plan price from its app (most telecom bundles include that tier, and only 2 of 21 bundles can be compared like-for-like without it), re-check prices monthly to build a price history, and rebuild the picker in Angular + ASP.NET Core.
 - **"Why SQL views instead of pandas everywhere?"** So every number is calculated once. The notebook, the dashboard and the tests all run the same named queries, which means they can't disagree.

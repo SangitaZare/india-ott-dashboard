@@ -22,7 +22,7 @@ The numbers are rarely wrong. They count **different things** (people vs subscri
 2. **The same platform, very different numbers.** JioHotstar's paying-subscriber estimates run from 180M (Media Partners Asia) to 300M (company, Aug 2025). A year later the company itself said "over 260 million paid *subscriptions*".
 3. **Paying yearly saves 38–69%** on every plan sold both monthly and yearly: from 38% on JioHotstar to 69% on SonyLIV Premium (₹4,788 over 12 monthly payments vs ₹1,499 for a year).
 4. **Per screen, multi-screen yearly plans are 2–8× cheaper than Netflix:** ₹31–62 per screen per month (Sun NXT, Hoichoi, SonyLIV) vs ₹149–250 for Netflix. The cheapest ad-free 4K is Aha GOLD at ₹83/month vs Netflix Premium at ₹649.
-5. **Telecom data packs can beat buying apps directly:** 6 of 9 data-only packs cost ₹11–₹207/month less than buying the same apps separately. But bundled apps are usually mobile-only tiers (e.g. JioHotstar *Mobile*, compared here with the cheapest web plan, Super), so these savings are an upper bound.
+5. **Most telecom bundles can't be compared like-for-like.** Only 2 of 21 include app tiers with an official price. The rest give tiers not sold on the web (JioHotstar Mobile, Prime Video Mobile Edition) or apps through an aggregator. Comparing them with each app's cheapest web plan would have shown savings of up to ₹207/month, but those were upper bounds, not real savings.
 
 Prices were checked on official plan pages on **23–24 Nov 2026**. Full reasoning is in the [analysis notebook](notebooks/analysis.ipynb).
 
@@ -89,7 +89,7 @@ Columns and rules: [data dictionary](data/DATA_DICTIONARY.md). Original readings
 ## Limitations
 
 - **A snapshot of prices.** Plans were checked on 23–24 Nov 2026 and change often. Telecom prices are for one circle (Maharashtra & Goa).
-- **Gaps:** no verified prices yet for **Planet Marathi** or **JioHotstar's Mobile plan** (not on the web plans page), and Tata Play Binge plans sit behind a login. Bundles that include JioHotstar Mobile are compared with JioHotstar Super, so their savings are overstated.
+- **Gaps:** no verified prices yet for **Planet Marathi** or **JioHotstar's Mobile plan** (not on the web plans page), and Tata Play Binge plans sit behind a login. Bundles are compared only with the same tier bought separately, so only 2 of 21 are comparable today; the JioHotstar Mobile price (app only) would unlock 5 more.
 - **Many plan details aren't stated** on official pages: screens at once (36 of 48 plans), supported devices, and the content languages of SonyLIV and ZEE5. Live cricket is verified only for JioHotstar and SonyLIV. These are left blank, which limits the per-screen comparison and the picker.
 - **Some subscriber figures are second-hand:** HSBC via an entertainment site with no report date; Netflix's 16M via a podcast transcript. Each row says so in `notes`.
 - **Not every value has been checked by hand yet.** Rows collected through AI-assisted browsing say so in `notes`. See [`TODO_verify.md`](data/TODO_verify.md) for everything still open.
