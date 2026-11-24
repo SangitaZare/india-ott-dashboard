@@ -23,7 +23,10 @@ def test_picker_javascript_unit_tests_pass() -> None:
         if os.environ.get("CI"):
             pytest.fail("Node.js is required in CI to run the picker tests")
         pytest.skip("Node.js is not installed")
+    # Pass the files by name: older Node versions (e.g. 22, used in CI) don't accept a folder after --test.
+    files = sorted(str(p.relative_to(REPO_ROOT)) for p in (REPO_ROOT / "tests" / "js").glob("*.test.js"))
+    assert files, "no JavaScript test files found in tests/js/"
     result = subprocess.run(
-        [NODE, "--test", "tests/js/"], cwd=REPO_ROOT, capture_output=True, text=True, encoding="utf-8", timeout=120
+        [NODE, "--test", *files], cwd=REPO_ROOT, capture_output=True, text=True, encoding="utf-8", timeout=120
     )
     assert result.returncode == 0, result.stdout[-4000:] + result.stderr[-2000:]

@@ -1,4 +1,4 @@
-// Unit tests for dashboard/js/picker.js. Run with:  node --test tests/js/
+// Unit tests for dashboard/js/picker.js. Run with:  node --test tests/js/*.test.js
 // (tests/test_picker_js.py runs these as part of pytest.)
 // All plans and platforms below are FAKE fixtures with hand-calculated answers.
 "use strict";
