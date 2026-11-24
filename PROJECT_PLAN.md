@@ -35,7 +35,7 @@ Build a portfolio-grade analytics project answering three questions:
   - `bundles.csv`: provider (Jio/Airtel/Tata Play Binge/etc.), bundle_name, price_inr, billing_period, included_platforms
 
 ### M2 — `data/platforms-and-prices`
-- [x] Collect current plans from **official plan pages only** for: Netflix, Amazon Prime Video, JioHotstar, SonyLIV, ZEE5, Aha, Hoichoi, Sun NXT, Planet Marathi (add others if easy) *(7 of 9 done; JioHotstar and Planet Marathi in TODO_verify)*
+- [x] Collect current plans from **official plan pages only** for: Netflix, Amazon Prime Video, JioHotstar, SonyLIV, ZEE5, Aha, Hoichoi, Sun NXT, Planet Marathi (add others if easy) *(8 of 9 done: JioHotstar added 24 Nov; Planet Marathi in TODO_verify)*
 - [x] Record accessed date on every row; unverifiable rows → `TODO_verify.md`
 - [x] Price anchors from research to **re-verify** (do not copy blindly): Netflix ₹149/199/499/649 per month; JioHotstar Mobile ₹79/mo or ₹499/yr, Super ₹149/mo or ₹1,099/yr, Premium ₹2,199/yr; Prime ₹299/mo or ₹1,499/yr; SonyLIV Premium ₹399/mo or ₹1,499/yr; ZEE5 All Access ₹1,499/yr; Aha ₹149 / ₹699; Hoichoi ₹149 / ₹899
 
