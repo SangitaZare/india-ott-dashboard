@@ -1,6 +1,6 @@
 # Resume bullets: India OTT Market Dashboard
 
-**Project line:** India OTT Market Dashboard | Python, SQL, pandas, Jupyter, JavaScript, Chart.js, GitHub Actions | github.com/SangitaZare/india-ott-dashboard
+**Project line:** India OTT Market Dashboard | Python, SQL, pandas, Jupyter, JavaScript, Chart.js, GitHub Actions | github.com/SangitaZare/india-ott-dashboard | Live: sangitazare.github.io/india-ott-dashboard
 
 - **Compiled and published a fully sourced dataset of India's OTT market:** 48 streaming plans, 21 telecom bundles and 19 subscriber figures across 9 platforms. Every value is traced to an official page or report, with dates. Built a Python validator, enforced in CI, that rejects unsourced figures and non-official prices.
 - **Explained why subscriber numbers disagree** by classifying 19 published figures into 7 measures (subscribers, subscriptions, households, active use, viewers, audience, viewing share). Showed that JioHotstar's "paying subscriber" estimates range from 180M to 300M (a 67% spread), and that India's 216M paid subscriptions sit in only 143M households.

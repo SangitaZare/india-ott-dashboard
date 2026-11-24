@@ -5,6 +5,8 @@
 **Why do India's streaming subscriber numbers disagree, what does OTT really cost in ₹, and which plans should a family pay for?**
 A data analytics project built on a hand-compiled, fully sourced dataset of Indian OTT platforms, plans, telecom bundles and subscriber figures.
 
+**▶ Live dashboard: [sangitazare.github.io/india-ott-dashboard](https://sangitazare.github.io/india-ott-dashboard/)**
+
 ## The headline
 
 > **One market, four "right" answers.** In 2025–26, **664.9M** Indians watched online video, **216M** paid video subscriptions were held by **143M** households, but only **172.6M** subscriptions were actually used in a month.
@@ -26,7 +28,7 @@ Prices were checked on official plan pages on **23 Nov 2026**. Full reasoning is
 
 ## The dashboard
 
-A static site (HTML + vanilla JavaScript + Chart.js) with three pages:
+A static site (HTML + vanilla JavaScript + Chart.js) with three pages, **live at [sangitazare.github.io/india-ott-dashboard](https://sangitazare.github.io/india-ott-dashboard/)** (re-published automatically on every merge to `main`):
 
 | Page | Answers |
 |---|---|
