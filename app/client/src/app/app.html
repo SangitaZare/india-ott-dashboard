@@ -1,0 +1,99 @@
+<main>
+  <section class="picker">
+    <header>
+      <p class="eyebrow">India OTT Market Dashboard</p>
+      <h1>Family plan picker</h1>
+      <p>Prices checked: {{ pricesChecked() }}</p>
+    </header>
+
+    <div class="form-grid">
+      <label>
+        Simultaneous screens
+        <input type="number" min="1" max="10" [(ngModel)]="screens" />
+      </label>
+
+      <label>
+        Monthly budget (₹)
+        <input type="number" min="0" [(ngModel)]="budget" placeholder="No limit" />
+      </label>
+
+      <label class="check">
+        <input type="checkbox" [(ngModel)]="adsOk" />
+        Ads are acceptable
+      </label>
+
+      <label class="check">
+        <input type="checkbox" [(ngModel)]="needsTv" />
+        Watch on TV
+      </label>
+
+      <label class="check">
+        <input type="checkbox" [(ngModel)]="cricket" />
+        Live cricket required
+      </label>
+
+      <label class="check">
+        <input type="checkbox" [(ngModel)]="allowUnverified" />
+        Allow unverified facts
+      </label>
+    </div>
+
+    <fieldset>
+      <legend>Languages</legend>
+      <div class="language-grid">
+        @for (language of languages(); track language) {
+          <button type="button"
+            class="language"
+            [class.selected]="isLanguageSelected(language)"
+            (click)="toggleLanguage(language)">
+            {{ language }}
+          </button>
+        }
+      </div>
+    </fieldset>
+
+    <button class="primary" type="button" [disabled]="loading()" (click)="findPlans()">
+      {{ loading() ? 'Finding plans...' : 'Find cheapest combination' }}
+    </button>
+
+    @if (apiError()) {
+      <p class="error">{{ apiError() }}</p>
+    }
+
+    @if (result(); as response) {
+      @if (response.status === 'ok' && response.best) {
+        <section class="result">
+          <p class="eyebrow">Best match</p>
+          <h2>₹{{ response.best.total }}/month</h2>
+          @for (plan of response.best.plans; track plan.platformId) {
+            <article>
+              <strong>{{ plan.platformId }} — {{ plan.planName }}</strong>
+              <span>₹{{ plan.pricePerMonth }}/month</span>
+            </article>
+          }
+          @if (response.best.unverified.length) {
+            <p class="warning">
+              Unverified facts: {{ response.best.unverified.length }}
+              @for (fact of response.best.unverified; track $index) {
+                <span>{{ fact.platformId }}: {{ fact.need }}</span>
+              }
+            </p>
+          }
+        </section>
+
+        @if (response.alternatives.length) {
+          <section>
+            <h3>Alternatives</h3>
+            @for (alternative of response.alternatives; track $index) {
+              <p>₹{{ alternative.total }}/month — {{ alternative.plans.length }} plan(s)</p>
+            }
+          </section>
+        }
+      } @else if (response.status === 'over_budget') {
+        <p class="error">The cheapest valid combination costs ₹{{ response.cheapestValid?.total }}/month.</p>
+      } @else {
+        <p class="error">No combination matches these requirements.</p>
+      }
+    }
+  </section>
+</main>

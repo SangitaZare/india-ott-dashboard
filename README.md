@@ -143,4 +143,19 @@ docs/          screenshots, resume bullets, LinkedIn draft
 ## Tech stack
 
 Python (pandas, sqlite3) · SQL (SQLite, window functions, CTEs) · Jupyter + matplotlib · HTML/CSS/vanilla JavaScript + Chart.js · pytest + Node test runner · GitHub Actions.
-Planned v2: the family picker rebuilt in Angular + ASP.NET Core (see [PROJECT_PLAN.md](PROJECT_PLAN.md)).
+The v2 family picker is available in [app/](app/) using Angular + ASP.NET Core.
+
+Run the v2 picker locally:
+
+```bash
+# ASP.NET Core API
+dotnet run --project app/server/OttPicker.Api.csproj
+
+# Angular UI (in a second terminal)
+cd app/client
+npm start
+
+# Tests
+dotnet test app/OttPicker.slnx
+cd app/client && npm test -- --watch=false
+```

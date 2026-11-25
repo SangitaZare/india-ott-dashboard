@@ -94,8 +94,8 @@ Collect every figure with its exact metric type. Starting leads from research (f
 - [x] Deploy `dashboard/` to GitHub Pages; add live link to README
 
 ### M12 (v2, later) — `feature/angular-dotnet-picker`
-- [ ] Rebuild the picker in `app/` as Angular + ASP.NET Core minimal API reading the same data
-- [ ] Tests (xUnit + Angular unit tests)
+- [x] Rebuild the picker in `app/` as Angular + ASP.NET Core minimal API reading the same data
+- [x] Tests (xUnit + Angular unit tests)
 
 ---
 
