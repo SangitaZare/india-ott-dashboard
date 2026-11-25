@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/server/">
+    <Project Path="server/OttPicker.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/OttPicker.Api.Tests/OttPicker.Api.Tests.csproj" />
+  </Folder>
+</Solution>
